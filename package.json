@@ -1,0 +1,20 @@
+{
+  "name": "votingapp",
+  "version": "1.0.0",
+  "description": "csc2102 assignment 2",
+  "main": "app.js",
+  "scripts": {
+    "start":"app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "group 9",
+  "license": "ISC",
+  "engines": {
+    "node": "18.12.0"
+  },
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongoose": "^6.10.0"
+  }
+}

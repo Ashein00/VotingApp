@@ -1,0 +1,19 @@
+<%- include('header') %>
+
+<h1>register</h1>
+
+<form action="/c_register" method="post">
+
+    <div class="form-group">
+
+        <label for="Name">Name</label>
+        <input type="text" name="Name">
+    </div>
+    <div class="form-group">
+        <label for="qualifications">candidate qualifications </label>
+        <input type="text"  name="qualifications">
+      </div>
+    <button type="submit" class="btn btn-dark">Register</button>
+</form>
+
+<%- include('footer') %>
