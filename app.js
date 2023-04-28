@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 
 mongoose.set('strictQuery', false);
 // mongoose.connect("mongodb://localhost:27017/votingAppDB", { useNewUrlParser: true });
-// gDuX85wF5mX9uxec
+
 const conn_str = "mongodb+srv://sanjueranga:A8D0iBJyKqXgTtYy@cluster0.rl958vp.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(
 conn_str,
