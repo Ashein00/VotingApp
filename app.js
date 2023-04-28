@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const res = require("express/lib/response");
 const { redirect } = require("express/lib/response");
 
-
+var isLogedIn = false;
 
 //database connection
 const mongoose = require('mongoose');
@@ -80,8 +80,12 @@ app.get("/login",function(req,res){
   });
 
   app.get("/vote",function(req,res){
+    if(isLogedIn===true){
+      res.render("vote",{status:"you can"});
+    }else{
+      res.render("vote",{status:"you can't vote,please login"});
+    }
     
-    res.render("vote",{status:"you can't vote,please login"});
    
     });
   
@@ -106,13 +110,6 @@ app.post("/register",function(req,res){
 
 
 
-
-
-
-
-
-
-
    app.get("/register",function(req,res){
     
     res.render("register")
@@ -129,7 +126,7 @@ app.post("/register",function(req,res){
       }else{
         if(foundUser){
           if(foundUser.password === password){
-            
+            isLogedIn = true;
             res.render("vote",{status:"you can vote"});
           }else{
             res.render("vote",{status:"wrong password"});
