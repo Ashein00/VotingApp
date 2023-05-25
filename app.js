@@ -147,7 +147,7 @@ app.post("/c_register",function(req,res){
     qualifications: req.body.qualifications
   });
 
-  newUser.save(function(err){
+  newCandidate.save(function(err){
     if(err){
       console.log(err);
     }else{
