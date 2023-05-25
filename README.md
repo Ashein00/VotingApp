@@ -1,4 +1,4 @@
-# CSC2102_Assignment4
+# Vote App
 
 !npm install
 
