@@ -4,17 +4,18 @@
   "description": "csc2102 assignment 2",
   "main": "/app.js",
   "scripts": {
-    "start":"node app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "group 9",
   "license": "ISC",
   "engines": {
-    "node": "18.12.0"
+    "node": ">=18.12.0"
   },
   "dependencies": {
     "ejs": "^3.1.8",
     "express": "^4.18.2",
-    "mongoose": "^6.10.0"
+    "mongoose": "^6.10.0",
+    "nodemon": "^2.0.22"
   }
 }
