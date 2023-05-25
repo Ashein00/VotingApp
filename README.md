@@ -1,4 +1,4 @@
-# VoteApp
+# Vote App
 
 !npm install
 
