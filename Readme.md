@@ -1,5 +1,6 @@
 # Vote App
 
-npm install
-npm start
+!npm install
 
+Website link:
+https://black-cow-tam.cyclic.app/
