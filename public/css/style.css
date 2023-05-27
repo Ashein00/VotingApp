@@ -1,3 +1,50 @@
-h1{
-    color: rgb(70, 226, 43);
+
+/* header */
+
+header{
+    background-color: #917FB3;
+}
+
+.navbar-brand {
+    margin-left: 10px;
+}
+
+.header-text{
+    color: #fff2fa;
+    font-family: 'Anton', sans-serif;
+    font-size: 2rem;
+}
+
+.nav-item {
+    display: grid;
+}
+
+.nav-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FDE2F3;
+    margin-right: 10px;
+}
+
+.button-33 {
+  background-color: #cc96d1;
+  border-radius: 20px;
+  color: #FDE2F3;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-33:hover {
+  transform: scale(1.05) rotate(-1deg);
 }
