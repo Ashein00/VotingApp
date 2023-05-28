@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 var isLogedIn = false;
+var currentUser = null;
 
 // <-- database connection -->
 
@@ -61,6 +62,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
+
 app.get("/", function (req, res) {
   res.render("home");
 });
@@ -70,11 +72,11 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", function (req, res) {
-  if (isLogedIn) {
-    res.render("vote", { status: "you can vote xD" });
-  } else {
-    res.render("vote", { status: "Sorry:( you can't vote,please login!" });
-  }
+  if (isLogedIn){
+    res.render("vote", { user : currentUser });
+  }else{
+    res.render("register");
+  }  
 });
 
 app.get("/register", function (req, res) {
@@ -111,7 +113,8 @@ app.post("/login", function (req, res) {
       if (foundUser) {
         if (foundUser.password === password) {
           isLogedIn = true;
-          res.render("vote", { status: "you can vote!" });
+          currentUser = foundUser;
+          res.render("vote", { status: "you can vote!", user: curr});
         } else {
           res.render("vote", { status: "wrong password" });
         }
