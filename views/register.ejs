@@ -1,19 +1,60 @@
 <%- include('header') %>
 
-<h1>register</h1>
+<main class="login-page">
+    <div class="session">
+      <form action="/login" method="post" class="log-in reg-form" autocomplete="off">
+        <h4>PLEBISCITE<span> '24</span></h4>
+        <p>Hello There! First of all feel free to fill this form before the Election:</p>
+  
+        <div class="floating-label">
+          <input
+            placeholder="Name"
+            type="text"
+            name="name"
+            id="name"
+            autocomplete="off"
+          />
+          <label for="email">Name:</label>
+        </div>
+        
+        <div class="floating-label">
+            <input
+              placeholder="NIC"
+              type="text"
+              name="NIC"
+              id="NIC"
+              autocomplete="off"
+            />
+            <label for="email">NIC:</label>
+          </div>
 
-<form action="/register" method="post">
-
-    <div class="form-group">
-
-        <label for="NIC">NIC</label>
-        <input type="text" name="NIC">
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password"  name="password">
+        <div class="floating-label">
+          <input
+            placeholder="Password"
+            type="password"
+            name="password"
+            id="password"
+            autocomplete="off"
+          />
+          <label for="password">Password:</label>
+        </div>
+        <button type="submit">Sign in</button>
+        <a
+          href="/login"
+          class="discrete"
+          
+          >Already have an account? Login</a
+        >
+      </form>
+      <div class="right">
+        <style type="text/css">
+          .st0 {
+            fill: #fff;
+          }
+        </style>
       </div>
-    <button type="submit" class="btn btn-dark">Register</button>
-</form>
+    </div>
+  </main>
+  
 
 <%- include('footer') %>
