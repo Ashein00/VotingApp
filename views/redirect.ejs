@@ -1,23 +1,11 @@
 <%- include("header") %>
 
-<main>
-  <h2>You need to login first <b>:)</b></h2>
-  <div class="gears">
-    <div class="gear one">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <div class="gear two">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <div class="gear three">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
+<main class="error-box">
+  <div class="box">
+    <h3> <%= msg %> </h3>
+    <a href="/login">
+        <button class="button-33" role="button">Login</button>
+      </a>
   </div>
 </main>
 

@@ -76,7 +76,7 @@ app.get("/vote", function (req, res) {
   if (isLogedIn){
     res.render("vote", { user : currentUser });
   }else{
-    res.render("redirect");
+    res.render("redirect",{msg : "you need to login first! please click the login button bellow"});
   }  
 });
 
@@ -116,12 +116,12 @@ app.post("/login", function (req, res) {
         if (foundUser.password === password) {
           isLogedIn = true;
           currentUser = foundUser;
-          res.render("vote", { status: "you can vote!", user: curr});
+          res.render("vote", { user : currentUser });
         } else {
-          res.render("vote", { status: "wrong password" });
+          res.render("redirect",{msg : "Incorrect password! please try again."});
         }
       } else {
-        res.render("vote", { status: "Sorry:( you can't vote,please login!" });
+        res.render("redirect",{msg : "User not defined! please check your username and password again."});
       }
     }
   });
