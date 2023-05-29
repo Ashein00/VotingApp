@@ -33,6 +33,7 @@ mongoose.connect(
 const userSchema = {
   NIC: String,
   password: String,
+  name: String
 };
 
 const voteSchema = {
@@ -75,7 +76,7 @@ app.get("/vote", function (req, res) {
   if (isLogedIn){
     res.render("vote", { user : currentUser });
   }else{
-    res.render("register");
+    res.render("redirect");
   }  
 });
 
@@ -89,6 +90,7 @@ app.get("/c_register", function (req, res) {
 
 app.post("/register", function (req, res) {
   const newUser = new User({
+    name: req.body.name,
     NIC: req.body.NIC,
     password: req.body.password,
   });
