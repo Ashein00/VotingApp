@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
+
 var isLogedIn = false;
 var currentUser = null;
 
@@ -28,6 +29,8 @@ mongoose.connect(
   }
 );
 
+
+
 // <-- Creating users and votes schemas -->
 
 const userSchema = {
@@ -47,8 +50,9 @@ const voteSchema = {
 const candidateSchema = {
   Name: String,
   qualifications: String,
-  party: String,
+  Party: String,
 };
+
 
 const User = mongoose.model("User", userSchema);
 const Vote = mongoose.model("vote", voteSchema);
@@ -74,7 +78,18 @@ app.get("/login", function (req, res) {
 
 app.get("/vote", function (req, res) {
   if (isLogedIn){
-    res.render("vote", { user : currentUser });
+    
+    
+      Candidate.find({},function(err,cands){
+        
+        res.render("vote", { user : currentUser ,candidates:cands});
+        
+
+      })
+    
+
+    
+
   }else{
     res.render("redirect",{msg : "you need to login first! please click the login button bellow"});
   }  
@@ -116,7 +131,8 @@ app.post("/login", function (req, res) {
         if (foundUser.password === password) {
           isLogedIn = true;
           currentUser = foundUser;
-          res.render("vote", { user : currentUser });
+          res.redirect('/vote')
+          // res.render("vote", { user : currentUser });
         } else {
           res.render("redirect",{msg : "Incorrect password! please try again."});
         }
@@ -131,6 +147,7 @@ app.post("/c_register", function (req, res) {
   const newCandidate = new Candidate({
     Name: req.body.Name,
     qualifications: req.body.qualifications,
+    Party:req.body.Party
   });
 
   newCandidate.save(function (err) {
