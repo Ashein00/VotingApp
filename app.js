@@ -79,7 +79,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", function (req, res) {
-  if (!isLogedIn){
+  if (isLogedIn){
     Candidate.find({},function(err,cands){
         
       if(err){
