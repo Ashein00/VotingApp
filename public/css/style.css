@@ -246,6 +246,7 @@ a.discrete:hover {
 
 /* Style the tab content */
 .tabcontent {
+  display: none;
   float: left;
   padding: 0px 12px;
   border: 1px solid #ccc;

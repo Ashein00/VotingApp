@@ -1,26 +1,30 @@
 <%- include('header') %>
 
 <main>
+
+  
     <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'London')"><%=candidates[0].Name%></button>
-        <button class="tablinks" onclick="openCity(event, 'Paris')"><%=candidates[1].Party%></button>
-        <button class="tablinks" onclick="openCity(event, 'Tokyo')"><%=candidates[2].Party%></button>
-      </div>
+
+      <% for(var k=0; k < parties.length; k++) { %>
+        <% var myArray = JSON.stringify(parties[k]); %>
+        <button class="tablinks" onclick="openTab(event,'<%= myArray %>')"><%=parties[k][0].party%></button>
+       
+     <% } %>
       
-      <div id="London" class="tabcontent">
-        <h3><%=candidates[0].Party%></h3>
-        <p> <%=candidates[0].qualification%></p>
+    </div>
+
+       
+    <% for(var i=0; i < parties.length; i++) { %>
+      <% for(var j=0; j < parties[i].length; j++) { %>
+      <div id="<%=parties[i][j].name%>" class="tabcontent">
+        <h3> <%=parties[i][j].name%></h3>
+        <p> <%=parties[i][j].qualifications%> </p>
       </div>
+      <% } %>
+    <% } %>
       
-      <div id="Paris" class="tabcontent">
-        <h3>Paris</h3>
-        <p>Paris is the capital of France..</p>
-      </div>
-      
-      <div id="Tokyo" class="tabcontent">
-        <h3>Tokyo</h3>
-        <p>Tokyo is the capital of Japan.</p>
-      </div>
+
+
       
 </main>
 

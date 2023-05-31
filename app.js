@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const getParties = require("./public/scripts/getParties");
 
 
 var isLogedIn = false;
@@ -48,9 +49,10 @@ const voteSchema = {
 };
 
 const candidateSchema = {
-  Name: String,
+  name: String,
   qualifications: String,
-  Party: String,
+  party: String,
+  voting_number:String
 };
 
 
@@ -77,19 +79,19 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", function (req, res) {
-  if (isLogedIn){
-    
-    
-      Candidate.find({},function(err,cands){
+  if (!isLogedIn){
+    Candidate.find({},function(err,cands){
         
-        res.render("vote", { user : currentUser ,candidates:cands});
-        
+      if(err){
+        console.log(err);
+      }
+      const partyArrays = getParties(cands);
+      
+      // console.log(partyArrays[0][2].name)
 
-      })
-    
+      res.render("vote", { user : currentUser , parties : partyArrays});
 
-    
-
+    })
   }else{
     res.render("redirect",{msg : "you need to login first! please click the login button bellow"});
   }  
@@ -145,9 +147,10 @@ app.post("/login", function (req, res) {
 
 app.post("/c_register", function (req, res) {
   const newCandidate = new Candidate({
-    Name: req.body.Name,
+    name: req.body.Name,
     qualifications: req.body.qualifications,
-    Party:req.body.Party
+    party:req.body.Party,
+    voting_number :req.body.voting_number
   });
 
   newCandidate.save(function (err) {
@@ -157,6 +160,7 @@ app.post("/c_register", function (req, res) {
       res.redirect("/");
     }
   });
+  
 });
 
 let port = process.env.PORT;
