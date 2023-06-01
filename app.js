@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const getParties = require("./public/scripts/getParties");
+
 
 var isLogedIn = false;
 var currentUser = null;
@@ -28,6 +30,8 @@ mongoose.connect(
   }
 );
 
+
+
 // <-- Creating users and votes schemas -->
 
 const userSchema = {
@@ -48,8 +52,8 @@ const candidateSchema = {
   name: String,
   qualifications: String,
   party: String,
-  number : Number
 };
+
 
 const User = mongoose.model("User", userSchema);
 const Vote = mongoose.model("vote", voteSchema);
@@ -75,7 +79,18 @@ app.get("/login", function (req, res) {
 
 app.get("/vote", function (req, res) {
   if (isLogedIn){
-    res.render("vote", { user : currentUser });
+    Candidate.find({},function(err,cands){
+        
+      if(err){
+        console.log(err);
+      }
+      const partyArrays = getParties(cands);
+      
+      // console.log(partyArrays[0][2].name)
+
+      res.render("vote", { user : currentUser , parties : partyArrays});
+
+    })
   }else{
     res.render("redirect",{msg : "you need to login first! please click the login button bellow"});
   }  
@@ -117,7 +132,7 @@ app.post("/login", function (req, res) {
         if (foundUser.password === password) {
           isLogedIn = true;
           currentUser = foundUser;
-          res.redirect("/vote");
+          res.render("vote", { user : currentUser });
         } else {
           res.render("redirect",{msg : "Incorrect password! please try again."});
         }
@@ -130,10 +145,8 @@ app.post("/login", function (req, res) {
 
 app.post("/c_register", function (req, res) {
   const newCandidate = new Candidate({
-    Name: req.body.fname +" "+ req.body.lname,
+    Name: req.body.Name,
     qualifications: req.body.qualifications,
-    party: req.body.party,
-    number: req.body.number,
   });
 
   newCandidate.save(function (err) {
@@ -143,6 +156,7 @@ app.post("/c_register", function (req, res) {
       res.redirect("/");
     }
   });
+  
 });
 
 let port = process.env.PORT;
