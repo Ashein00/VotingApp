@@ -45,9 +45,10 @@ const voteSchema = {
 };
 
 const candidateSchema = {
-  Name: String,
+  name: String,
   qualifications: String,
   party: String,
+  number : Number
 };
 
 const User = mongoose.model("User", userSchema);
@@ -116,7 +117,7 @@ app.post("/login", function (req, res) {
         if (foundUser.password === password) {
           isLogedIn = true;
           currentUser = foundUser;
-          res.render("vote", { user : currentUser });
+          res.redirect("/vote");
         } else {
           res.render("redirect",{msg : "Incorrect password! please try again."});
         }
@@ -129,8 +130,10 @@ app.post("/login", function (req, res) {
 
 app.post("/c_register", function (req, res) {
   const newCandidate = new Candidate({
-    Name: req.body.Name,
+    Name: req.body.fname +" "+ req.body.lname,
     qualifications: req.body.qualifications,
+    party: req.body.party,
+    number: req.body.number,
   });
 
   newCandidate.save(function (err) {

@@ -1,19 +1,48 @@
 <%- include('header') %>
 
-<h1>register</h1>
+<section class="canReg-body">
+    <form id="msform" action="/c_register" method="post">
+        
+        <ul id="progressbar">
+          <li class="active">Personal Details</li>
+          <li>Qualifications</li>
+          <li>Party Details</li>
+        </ul>
 
-<form action="/c_register" method="post">
-
-    <div class="form-group">
-
-        <label for="Name">Name</label>
-        <input type="text" name="Name">
-    </div>
-    <div class="form-group">
-        <label for="qualifications">candidate qualifications </label>
-        <input type="text"  name="qualifications">
-      </div>
-    <button type="submit" class="btn btn-dark">Register</button>
-</form>
+        <fieldset>
+          <h2 class="fs-title">Candidate Registration</h2>
+          <h3 class="fs-subtitle">enter your personal details:</h3>
+          <input type="text" name="fname" placeholder="First Name" />
+          <input type="text" name="lname" placeholder="Last Name" />
+          <input type="number" id="creg-age" max="120" min="45" name="age" placeholder="Age" />
+          <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+    
+        <fieldset>
+          <h2 class="fs-title">Qualifications</h2>
+          <h3 class="fs-subtitle">describes who you are:</h3>
+          <textarea name="qualification" id="qualification" cols="30" rows="10"></textarea>
+          <input type="button" name="previous" class="previous action-button" value="Previous" />
+          <input type="button" name="next" class="next action-button" value="Next" />
+        </fieldset>
+    
+        <fieldset>
+          <h2 class="fs-title">Party Details</h2>
+          <h3 class="fs-subtitle">select your party and number:</h3>
+          <select required name="party" id="party">
+            <option  value="Democratic Party"">Democratic Party</option>
+            <option  value="Republican Party ">Republican Party </option>
+            <option  value="Labour Party">Labour Party</option>
+            <option  value="Liberal Party">Liberal Party</option>
+          </select>
+          
+          <input class="elnumber" required max="100" min="1" type="number" name="num" placeholder="number" />
+    
+          <input type="button" name="previous" class="previous action-button" value="Previous" />
+          <input type="submit" class="action-button" value="submit" />
+        </fieldset>
+      </form>
+    
+</section>
 
 <%- include('footer') %>
