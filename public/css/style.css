@@ -364,7 +364,10 @@ a.discrete:hover {
 #msform fieldset:not(:first-of-type) {
 	display: none;
 }
+.candidate-info .number{
+  font-size:3rem;
 
+}
 #msform input, #msform textarea {
 	padding: 1rem;
 	border: 0.5px solid #ccc;
@@ -377,6 +380,7 @@ a.discrete:hover {
 	font-size: 14px;
   
 }
+
 
 #msform #creg-age {
   width: 50% ;
@@ -431,5 +435,41 @@ a.discrete:hover {
 	font-size: 13px;
 	color: #666;
 	margin-bottom: 1rem;
+}
+
+.candidate-info {
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 10px;
+  width: 240px;
+  margin: 16px;
+  float: left;
+}.candidate-info p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  
+  
+}
+
+
+.candidate-info h1 {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+
+}
+.candidate-info p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  
+  
+}
+.candidate-info .number{
+  font-size:3rem;
+
 }
 

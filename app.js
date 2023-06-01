@@ -52,6 +52,7 @@ const candidateSchema = {
   name: String,
   qualifications: String,
   party: String,
+  voting_number: Number
 };
 
 
@@ -78,7 +79,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", function (req, res) {
-  if (isLogedIn){
+  if (!isLogedIn){
     Candidate.find({},function(err,cands){
         
       if(err){
@@ -86,7 +87,7 @@ app.get("/vote", function (req, res) {
       }
       const partyArrays = getParties(cands);
       
-      // console.log(partyArrays[0][2].name)
+      
 
       res.render("vote", { user : currentUser , parties : partyArrays});
 
@@ -96,12 +97,18 @@ app.get("/vote", function (req, res) {
   }  
 });
 
+
+
 app.get("/register", function (req, res) {
   res.render("register");
 });
 
 app.get("/c_register", function (req, res) {
   res.render("c_register");
+});
+
+app.post("/vote", function (req, res) {
+  
 });
 
 app.post("/register", function (req, res) {
@@ -145,8 +152,11 @@ app.post("/login", function (req, res) {
 
 app.post("/c_register", function (req, res) {
   const newCandidate = new Candidate({
-    Name: req.body.Name,
-    qualifications: req.body.qualifications,
+    name: req.body.fname +" "+ req.body.lname,
+    qualifications: req.body.qualification,
+    party:req.body.party,
+    voting_number:req.body.voting_number
+
   });
 
   newCandidate.save(function (err) {
