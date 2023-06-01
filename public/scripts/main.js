@@ -29,7 +29,6 @@ $(function() {
     
     }
     evt.currentTarget.className += " active";
-<<<<<<< HEAD
   }
 
 
@@ -99,8 +98,3 @@ $(".previous").click(function(){
 	});
 });
 
-=======
-    
-  }
-
->>>>>>> refs/remotes/origin/main
