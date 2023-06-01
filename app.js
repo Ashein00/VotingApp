@@ -52,7 +52,6 @@ const candidateSchema = {
   name: String,
   qualifications: String,
   party: String,
-  voting_number:String
 };
 
 
@@ -139,8 +138,7 @@ app.post("/login", function (req, res) {
         if (foundUser.password === password) {
           isLogedIn = true;
           currentUser = foundUser;
-          res.redirect('/vote')
-          // res.render("vote", { user : currentUser });
+          res.render("vote", { user : currentUser });
         } else {
           res.render("redirect",{msg : "Incorrect password! please try again."});
         }
@@ -153,10 +151,8 @@ app.post("/login", function (req, res) {
 
 app.post("/c_register", function (req, res) {
   const newCandidate = new Candidate({
-    name: req.body.Name,
+    Name: req.body.Name,
     qualifications: req.body.qualifications,
-    party:req.body.Party,
-    voting_number :req.body.voting_number
   });
 
   newCandidate.save(function (err) {
