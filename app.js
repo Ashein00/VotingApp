@@ -79,7 +79,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", function (req, res) {
-  if (!isLogedIn){
+  if (isLogedIn){
     Candidate.find({},function(err,cands){
         
       if(err){
@@ -87,7 +87,7 @@ app.get("/vote", function (req, res) {
       }
       const partyArrays = getParties(cands);
       
-      
+      // console.log(partyArrays[0][2].name)
 
       res.render("vote", { user : currentUser , parties : partyArrays});
 
@@ -97,8 +97,6 @@ app.get("/vote", function (req, res) {
   }  
 });
 
-
-
 app.get("/register", function (req, res) {
   res.render("register");
 });
@@ -107,8 +105,8 @@ app.get("/c_register", function (req, res) {
   res.render("c_register");
 });
 
-app.post("/vote", function (req, res) {
-  
+app.get("/results", function (req, res) {
+  res.render("results");
 });
 
 app.post("/register", function (req, res) {
