@@ -52,6 +52,7 @@ const candidateSchema = {
   name: String,
   qualifications: String,
   party: String,
+  voting_number: Number
 };
 
 
@@ -151,8 +152,11 @@ app.post("/login", function (req, res) {
 
 app.post("/c_register", function (req, res) {
   const newCandidate = new Candidate({
-    Name: req.body.Name,
-    qualifications: req.body.qualifications,
+    name: req.body.fname +" "+ req.body.lname,
+    qualifications: req.body.qualification,
+    party:req.body.party,
+    voting_number:req.body.voting_number
+
   });
 
   newCandidate.save(function (err) {
