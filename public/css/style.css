@@ -285,6 +285,157 @@ a.discrete:hover {
   margin-top: 3rem;
 }
 
+/* registration of candidates  */
+
+.canReg-body {
+  background-image: url("https://img.freepik.com/fotos-gratis/arranjo-no-local-de-trabalho-no-fundo-roxo-com-espaco-da-copia_23-2148404536.jpg?w=740&t=st=1685550423~exp=1685551023~hmac=fb0f260496e10c6a6961c191e50a74d0a7fb35779c5ef9b93a6546a527123b4d"); 
+  background-size: cover; 
+  height: 80vh;
+}
+
+#msform {
+	width: 30rem;
+	margin: 0 auto; 
+  padding-top: 2rem ;
+	text-align: center;
+	position: relative;
+}
+
+#progressbar {
+	margin-bottom: 2rem;
+	overflow: hidden; 
+  padding: 0%;
+	counter-reset: step;
+}
+
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 1rem;
+	line-height: 1rem;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1;
+}
+#progressbar li:first-child:after {
+	content: none; 
+}
+
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #9437a7;
+	color: white;
+}
+
+#msform fieldset {
+	background: rgb(232, 176, 240);
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 1.8rem 2.5rem;
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+	position: relative;
+}
+
+#msform fieldset:not(:first-of-type) {
+	display: none;
+}
+.candidate-info .number{
+  font-size:3rem;
+
+}
+#msform input, #msform textarea {
+	padding: 1rem;
+	border: 0.5px solid #ccc;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #340552;
+	font-size: 14px;
+  
+}
+
+
+#msform #creg-age {
+  width: 50% ;
+  margin-right: 10rem; 
+  padding: 0.8rem;
+}
+
+#msform textarea {
+  padding: 0;
+}
+
+#msform select {
+  margin: 1rem;
+  padding: 0.5rem;
+  border: #340552;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#msform .elnumber {
+  width: 50%;
+  margin: 1.5rem;
+  text-align: center;
+}
+
+#msform .action-button {
+	width: 6rem;
+	background: #9437a7;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 5px;
+	cursor: pointer;
+	padding: 0.61rem;
+	margin: 10px 5px;
+  text-decoration: none;
+  font-size: 13px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #bc0bcc;
+}
+
+.fs-title {
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 0.8rem;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 1rem;
+}
 
 .candidate-info {
   background: #fff;
@@ -294,7 +445,16 @@ a.discrete:hover {
   width: 240px;
   margin: 16px;
   float: left;
+}.candidate-info p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  
+  
 }
+
+
 .candidate-info h1 {
   font-size: 1.1em;
   margin-bottom: 10px;

@@ -3,8 +3,7 @@ $(function() {
       $('body').removeClass('loading');
     }, 1000);
   });
-var clicked;
-  
+
 
   function openTab(evt, partyName) {
     // Declare all variables
@@ -55,19 +54,9 @@ var clicked;
       });
     });
     
-    
-      
-    
-   
-    
-    
 
     evt.currentTarget.className += " active";
-<<<<<<< HEAD
   }
-
-
-
 
 // candidate register site
  
@@ -133,14 +122,4 @@ $(".previous").click(function(){
 	});
 });
 
-=======
 
-  // Get the form element
-
-
-
-   
-
-  }
-
->>>>>>> refs/remotes/origin/main
