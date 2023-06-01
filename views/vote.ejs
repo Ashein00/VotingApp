@@ -16,9 +16,10 @@
        
     <% for(var i=0; i < parties.length; i++) { %>
       <% for(var j=0; j < parties[i].length; j++) { %>
-      <div id="<%=parties[i][j].name%>" class="tabcontent">
-        <h3> <%=parties[i][j].name%></h3>
-        <p> <%=parties[i][j].qualifications%> </p>
+      <div id="<%=parties[i][j].name%>" class="tabcontent candidate-info">
+        <h3 class="name"> <%=parties[i][j].name%></h3>
+        <p class="qualifications"> <%=parties[i][j].qualifications%> </p>
+        <p class="number"><%=parties[i][j].voting_number%></p>
       </div>
       <% } %>
     <% } %>

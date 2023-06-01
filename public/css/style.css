@@ -217,7 +217,7 @@ a.discrete:hover {
   border: 1px solid #ccc;
   background-color: #f1f1f1;
   width: 30%;
-  height: 300px;
+  height: 330px;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -225,7 +225,7 @@ a.discrete:hover {
   display: block;
   background-color: inherit;
   color: black;
-  padding: 22px 16px;
+  padding: 28px 16px;
   width: 100%;
   border: none;
   outline: none;
@@ -283,4 +283,33 @@ a.discrete:hover {
 
 .error-box button {
   margin-top: 3rem;
+}
+
+
+.candidate-info {
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 10px;
+  width: 240px;
+  margin: 16px;
+  float: left;
+}
+.candidate-info h1 {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+
+}
+.candidate-info p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  
+  
+}
+.candidate-info .number{
+  font-size:3rem;
+  
+  
 }
