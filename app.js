@@ -45,8 +45,7 @@ const voteSchema = {
   party: String,
   vote1: String,
   vote2: String,
-  vote3: String,
-  vote3: String,
+  vote3: String
 };
 
 const candidateSchema = {
@@ -121,7 +120,6 @@ app.post("/vote", function (req, res) {
     const newVote = new Vote({
      NIC: currentUser.NIC,
      party:party,
-     vote: vote,
      vote1:vote1,
      vote2:vote2,
      vote3:vote3
