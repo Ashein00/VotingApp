@@ -474,6 +474,31 @@ a.discrete:hover {
 }
 
 #resultPlot {
-  width:80%;
-  padding:0 10%; 
+  width:80vw;
+  padding:0 10vw;
+  margin-top: 10px;
+}
+
+.legend {
+  text-align: center;
+}
+
+.legend .box {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+  width: 150px;
+}
+
+.legend .color {
+  width: 40px;
+  height: 40px;
+  margin: 0 55px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.legend .name {
+  font-size: 14px;
+  margin-top: 5px;
 }

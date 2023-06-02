@@ -134,31 +134,3 @@ $(".previous").click(function () {
 });
 
 // result page
-
-function getGraph(voteDict){
-
-  const xArray = Objects.values(voteDict);
-  const yArray = [];
-
-  var i=0;
-  for (row in Object.keys(voteDict)){
-    yArray[i] = row.split("|")[1];
-  }
-
-  alert(xArray[0])
-
-  const data = [
-    {
-      x: xArray,
-      y: yArray,
-      type: "bar",
-      orientation: "h",
-      marker: { color: "rgba(255,0,0,0.6)" },
-    },
-  ];
-
-  const layout = { title: "World Wide Wine Production" };
-
-  Plotly.newPlot("resultPlot", data, layout);
-
-}
