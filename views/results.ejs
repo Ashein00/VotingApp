@@ -2,4 +2,66 @@
 
 <div id="resultPlot"></div>
 
+<script>
+    const voteDict = <%- JSON.stringify(votes) %>;
+
+    let sortedVote = [];
+    for (var row in voteDict){
+        sortedVote.push([row, voteDict[row] ]);
+    }
+    sortedVote.sort(function(a,b){
+        return a[1] - b[1];
+    })
+
+    const xArray = [];
+    const yArray = [];
+    const partyArr = [];
+
+    for (var i=0;i < sortedVote.length; i++){
+        xArray[i] = sortedVote[i][1];
+        yArray[i] = sortedVote[i][0].split("|")[1];
+        partyArr[i] = sortedVote[i][0].split("|")[0];
+    }
+
+    var colorArr = partyArr.map(function (party) {
+      if (party === "Democratic Party")
+        return "red";
+      else if (party === "Democratic Party")
+        return "green";
+      else if (party === "Republican Party")
+        return "red";
+      else if (party === "Labour Party")
+        return "blue";
+      else if (party === "Liberal Party")
+        return "black";
+      else 
+        return "grey";
+    });
+
+    const data = [
+        {
+        x: xArray,
+        y: yArray,
+        type: "bar",
+        orientation: "h",
+        marker: {
+            color: colorArr,
+        },
+        },
+    ];
+
+
+    const layout = { 
+        title: "Plebiscite 2024 current results",
+
+    };
+
+    const config = {
+        displayModeBar: false,  
+    };
+
+    Plotly.newPlot("resultPlot", data, layout,config);
+
+</script>
+
 <%- include('footer') %>
