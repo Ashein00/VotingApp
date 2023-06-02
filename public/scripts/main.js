@@ -4,29 +4,41 @@ $(function () {
   }, 1000);
 });
 
-function openTab(evt, partyName) {
-  // Declare all variables
-  //confirm.log(partyName)
-  var i, tabcontent, tablinks;
 
-  var parties = JSON.parse(partyName);
+  function openTab(evt, partyName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
 
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
+    const array = partyName.replace(/[\n\r]/g, '');
+    
+    var parties = JSON.parse(array);
+    
+    const checked = document.querySelectorAll('input[type="checkbox"][name="myCheckbox"]:checked');
+    
+    for(var j =0 ; j<checked.length;j++){
+      checked[i].checked = false;
+    }
+  
 
-  // // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the link that opened the tab
-  for (i = 0; i < parties.length; i++) {
-    document.getElementById(parties[i].name).style.display = "block";
-  }
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+      
+    }
+  
+    // // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    for(i=0;i<parties.length;i++){
+      document.getElementById(parties[i].name).style.display = "block";
+      
+     
+    }
 
   const maxCheckboxes = 3;
 
@@ -35,18 +47,17 @@ function openTab(evt, partyName) {
     'input[type="checkbox"][name="myCheckbox"]'
   );
 
-  // Add event listeners to each checkbox
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", function () {
-      // Get the number of currently checked checkboxes
-      const checkedCount = document.querySelectorAll(
-        'input[type="checkbox"][name="myCheckbox"]:checked'
-      ).length;
+    // Add event listeners to each checkbox
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        // Get the number of currently checked checkboxes
+        const checkedCount = document.querySelectorAll('input[type="checkbox"][name="myCheckbox"]:checked').length;
+        
 
-      // Check if the maximum limit has been reached
-      if (checkedCount > maxCheckboxes) {
-        this.checked = false; // Uncheck the current checkbox
-      }
+        // Check if the maximum limit has been reached
+        if (checkedCount > maxCheckboxes) {
+          this.checked = false; // Uncheck the current checkbox
+        }
 
       // Disable additional checkboxes if the maximum limit has been reached
       checkboxes.forEach((cb) => {

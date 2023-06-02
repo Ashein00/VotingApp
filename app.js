@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const getParties = require("./public/scripts/getParties");
 const getVotes = require("./public/scripts/getVotes");
 
-
 var isLogedIn = false;
 var currentUser = null;
 
@@ -32,13 +31,13 @@ mongoose.connect(
 );
 
 
-
 // <-- Creating users and votes schemas -->
 
 const userSchema = {
   NIC: String,
   password: String,
-  name: String
+  name: String,
+  voted:Boolean
 };
 
 const voteSchema = {
@@ -46,6 +45,7 @@ const voteSchema = {
   party: String,
   vote1: String,
   vote2: String,
+  vote3: String,
   vote3: String,
 };
 
@@ -59,7 +59,7 @@ const candidateSchema = {
 
 const User = mongoose.model("User", userSchema);
 const Vote = mongoose.model("vote", voteSchema);
-const Candidate = mongoose.model("Candidate", candidateSchema);
+const Candidate = mongoose.model("Candidate", candidateSchema,"candidates",{ versionKey: false });
 
 // <-- app -->
 
@@ -80,16 +80,14 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", function (req, res) {
-  if (!isLogedIn){
+  if (isLogedIn){
     Candidate.find({},function(err,cands){
         
       if(err){
         console.log(err);
       }
-      const partyArrays = getParties(cands);
-      
-        //console.log(partyArrays)
-  
+      const partyArrays = getParties(cands);  
+    
       res.render("vote", { user : currentUser , parties : partyArrays});
   
     })
@@ -106,6 +104,54 @@ app.get("/c_register", function (req, res) {
   res.render("c_register");
 });
 
+app.get("/alert",function(req,res){
+  res.render("alert",{msg: "you have already voted"});
+});
+
+
+app.post("/vote", function (req, res) {
+
+  if(currentUser.voted ==false){
+
+    const vote = req.body.myCheckbox;
+
+    const [vote1,vote2,vote3] = vote;
+
+    const party = vote1.split('|')[0];
+    const newVote = new Vote({
+     NIC: currentUser.NIC,
+     party:party,
+     vote: vote,
+     vote1:vote1,
+     vote2:vote2,
+     vote3:vote3
+
+    });
+    newVote.save(function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        currentUser.voted = true;
+        User.findOne({ NIC: currentUser.NIC })
+          .then(user => {
+            if (user) {
+              user.voted = true; // Update the age to 30
+              return user.save(); // Save the changes
+            } else {
+              throw new Error('User not found');
+            }
+          })
+
+      res.redirect("/vote");
+      }
+  });
+
+  }else{
+     
+    res.redirect('/alert');
+  }
+});  
+  
 app.get("/results", function (req, res) {
   Vote.find({},function(err,votes){  
     if(err){
@@ -124,8 +170,9 @@ app.post("/register", function (req, res) {
     name: req.body.name,
     NIC: req.body.NIC,
     password: req.body.password,
+    voted: false
   });
-
+ 
   newUser.save(function (err) {
     if (err) {
       console.log(err);
@@ -147,7 +194,7 @@ app.post("/login", function (req, res) {
         if (foundUser.password === password) {
           isLogedIn = true;
           currentUser = foundUser;
-          res.render("vote", { user : currentUser });
+          res.redirect("/vote");
         } else {
           res.render("redirect",{msg : "Incorrect password! please try again."});
         }
@@ -159,9 +206,11 @@ app.post("/login", function (req, res) {
 });
 
 app.post("/c_register", function (req, res) {
+  const newValue = req.body.qualification.replace(/\n/g, '');
   const newCandidate = new Candidate({
+    
     name: req.body.fname +" "+ req.body.lname,
-    qualifications: req.body.qualification,
+    qualifications:newValue,
     party:req.body.party,
     voting_number:req.body.voting_number
 
