@@ -45,8 +45,7 @@ const voteSchema = {
   party: String,
   vote1: String,
   vote2: String,
-  vote3: String,
-  vote3: String,
+  vote3: String
 };
 
 const candidateSchema = {
