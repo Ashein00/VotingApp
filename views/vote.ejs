@@ -6,38 +6,33 @@
     <div class="tab">
 
       <% for(var k=0; k < parties.length; k++) { %>
-        <% var myArray = JSON.stringify(parties[k]); %>
-        <button id="<%=parties[k][0].party%>" class="tablinks" onclick="openTab(event,'<%= myArray %>')"><%=parties[k][0].party%></button>
         
-       
+        <% var myArray = JSON.stringify(parties[k]); %>
+        <button  id="<%=parties[k][0].party%>" class="tablinks" onclick="openTab(event,'<%= myArray %>')"><%=parties[k][0].party%></button>
+        
      <% } %>
+     
       
     </div>
 
-       
+
+    <form id="voting_form" action="/vote" method="post" autocomplete="off"> 
     <% for(var i=0; i < parties.length; i++) { %>
-
-      <form id="voting_form" action="/vote" method="post" autocomplete="off"></form>
-
       <% for(var j=0; j < parties[i].length; j++) { %>
       <div id="<%=parties[i][j].name%>" class="tabcontent candidate-info">
         <h3 class="name"> <%=parties[i][j].name%></h3>
         <p class="qualifications"> <%=parties[i][j].qualifications%> </p>
         <p class="number"><%=parties[i][j].voting_number%></p>
         <div class="checkbox-container">
-        <input type="checkbox" name="myCheckbox" value="<%=parties[i][j].name%>" id="myCheckbox">
+        <input type="checkbox" name="myCheckbox" value="<%=parties[i][j].party%>|<%=parties[i][j].name%>|<%=parties[i][j].voting_number%>" id="<%=parties[i][j].name%>">
       </div>
       </div>
       <% } %>
-    </form>
     <% } %>
+    <button type="submit"> CONFIRM </button>
+  </form>
   </div>  
       
-
-    
-     
-
-
       
 </main>
 
