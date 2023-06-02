@@ -5,6 +5,7 @@ const getParties = require("./public/scripts/getParties");
 const getVotes = require("./public/scripts/getVotes");
 
 var isLogedIn = false;
+var currentUser;
 
 
 // <-- database connection -->
@@ -201,7 +202,7 @@ app.post("/login", function (req, res) {
       if (foundUser) {
         if (foundUser.password === password) {
           isLogedIn = true;
-         const currentUser = foundUser;
+          currentUser = foundUser;
           res.redirect("/vote");
         } else {
           const link = "/login";
