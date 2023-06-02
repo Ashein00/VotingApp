@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const getParties = require("./public/scripts/getParties");
-
+const getVotes = require("./public/scripts/getVotes");
 
 var isLogedIn = false;
 var currentUser = null;
@@ -31,7 +31,6 @@ mongoose.connect(
 );
 
 
-
 // <-- Creating users and votes schemas -->
 
 const userSchema = {
@@ -46,6 +45,7 @@ const voteSchema = {
   party: String,
   vote1: String,
   vote2: String,
+  vote3: String,
   vote3: String,
 };
 
@@ -86,18 +86,15 @@ app.get("/vote", function (req, res) {
       if(err){
         console.log(err);
       }
-      const partyArrays = getParties(cands);
-      
+      const partyArrays = getParties(cands);  
     
       res.render("vote", { user : currentUser , parties : partyArrays});
-
+  
     })
   }else{
     res.render("redirect",{msg : "you need to login first! please click the login button bellow"});
   }  
 });
-
-
 
 app.get("/register", function (req, res) {
   res.render("register");
@@ -152,10 +149,19 @@ app.post("/vote", function (req, res) {
      
     res.redirect('/alert');
   }
+});  
   
-  
-});
+app.get("/results", function (req, res) {
+  Vote.find({},function(err,votes){  
+    if(err){
+      console.log(err);
+    }
+    const voteArrays = getVotes(votes);
 
+    res.render("results", {votes : voteArrays });
+
+  })
+});
 
 
 app.post("/register", function (req, res) {

@@ -1,0 +1,115 @@
+<%- include('header') %>
+
+<div id="resultPlot"></div>
+
+<div class="legend">
+    <div class="box">
+        <div class="color" style="background-color: #8f1e1e;"></div>
+        <div class="name">Democratic Party</div>
+    </div>
+    <div class="box">
+        <div class="color" style="background-color: #b4ad48;"></div>
+        <div class="name">Republican Party</div>
+    </div>
+    <div class="box">
+        <div class="color" style="background-color: #18851d;"></div>
+        <div class="name">Labour Party</div>
+    </div>
+    <div class="box">
+        <div class="color" style="background-color: #34286b;"></div>
+        <div class="name">Liberal Party</div>
+    </div>
+
+</div>
+
+<script>
+    const voteDict = <%- JSON.stringify(votes) %>;
+
+    let sortedVote = [];
+    for (var row in voteDict){
+        sortedVote.push([row, voteDict[row] ]);
+    }
+    sortedVote.sort(function(a,b){
+        return a[1] - b[1];
+    })
+
+    const xArray = [];
+    const yArray = [];
+    const partyArr = [];
+    const indexArr = [];
+
+    for (var i=0;i < sortedVote.length; i++){
+        xArray[i] = sortedVote[i][1];
+        yArray[i] = sortedVote[i][0].split("|")[1];
+        partyArr[i] = sortedVote[i][0].split("|")[0];
+        indexArr[i] = "ElectNO: " + sortedVote[i][0].split("|")[2];
+    }
+
+    var colorArr = partyArr.map(function (party) {
+      if (party === "Democratic Party")
+        return "#8f1e1e";
+      else if (party === "Republican Party")
+        return "#b4ad48";
+      else if (party === "Labour Party")
+        return "#18851d";
+      else if (party === "Liberal Party")
+        return "#34286b";
+      else 
+        return "grey";
+    });
+
+    const data = [
+        {
+        x: xArray,
+        y: yArray,
+        type: "bar",
+        orientation: "h",
+        marker: {
+            color: colorArr,
+         },
+        text: indexArr,
+        opacity : 0.8,
+        },
+    ];
+
+
+    const layout = { 
+        title: {
+            text:"Plebiscite 2024 current results",
+            font: {
+                family: 'Arial,Segoe UI',
+                size: 24
+            }
+        },
+        margin: {
+            pad: 3,
+            l: 150,
+        },
+        // height:500,
+        font: {
+            color: "#534582",
+            family: "Open Sans",
+            size: 14
+        },
+        paper_bgcolor : "#E9DCE5",
+        plot_bgcolor : "#D8BFD8",
+
+        hoverlabel : {
+            font: {
+                family: "Courier New",
+                size: 14
+            },
+        },
+        bargap:0.3,
+
+    };
+
+    const config = {
+        displayModeBar: false,  
+    };
+
+    Plotly.newPlot("resultPlot", data, layout,config);
+
+</script>
+
+<%- include('footer') %>
