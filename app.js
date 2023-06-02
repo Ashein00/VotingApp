@@ -151,7 +151,7 @@ app.post("/login", function (req, res) {
 });
 
 app.post("/vote", function (req, res) {
-  
+  console.log(currentUser);
   if(currentUser.voted ==false){
 
     const vote = req.body.myCheckbox;
