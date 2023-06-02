@@ -125,7 +125,7 @@ app.get("/results", function (req, res) {
 //post methods
 
 app.post("/vote", function (req, res) {
-
+  console.log(currentUser);
   if(currentUser.voted ==false){
 
     const vote = req.body.myCheckbox;
@@ -204,8 +204,8 @@ app.post("/login", function (req, res) {
         if (foundUser.password === password) {
           isLogedIn = true;
           currentUser = foundUser;
-          console.log(currentUser);
-          res.redirect("/vote");
+          
+          res.redirect("/vote",{currentUser:currentUser});
         } else {
           const link = "/login";
           res.render("redirect",{msg : "Incorrect password! please try again.", link:link,button_name:"Log In"});
