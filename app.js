@@ -82,6 +82,7 @@ app.get("/login", function (req, res) {
 
 app.get("/vote", function (req, res) {
   if (isLogedIn){
+    console.log(currenUser);
     Candidate.find({},function(err,cands){
         
       if(err){
