@@ -143,19 +143,24 @@ app.post("/vote", function (req, res) {
       if (err) {
         console.log(err);
       } else {
-        currentUser.voted = true;
-        User.findOne({ NIC: currentUser.NIC })
-          .then(user => {
-            if (user) {
-              user.voted = true; // Update the age to 30
-              return user.save(); // Save the changes
-            } else {
-              throw new Error('User not found');
-            }
-          })
-
-      res.redirect("/vote");
-      }
+        if(currentUser){
+          currentUser.voted = true;
+          User.findOne({ NIC: currentUser.NIC })
+            .then(user => {
+              if (user) {
+                user.voted = true;
+                return user.save();
+              } else {
+                throw new Error('User not found');
+              }
+            })
+  
+        res.redirect("/vote");
+        }else{
+          res.redirect("/");
+        }
+        }
+      
   });
 
   }else{
