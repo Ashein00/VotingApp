@@ -82,7 +82,7 @@ app.get("/login", function (req, res) {
 
 app.get("/vote", function (req, res) {
   if (isLogedIn){
-    console.log(currenUser);
+   
     Candidate.find({},function(err,cands){
         
       if(err){
@@ -204,6 +204,7 @@ app.post("/login", function (req, res) {
         if (foundUser.password === password) {
           isLogedIn = true;
           currentUser = foundUser;
+          console.log(currentUser);
           res.redirect("/vote");
         } else {
           const link = "/login";
