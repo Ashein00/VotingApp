@@ -70,6 +70,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
+//get methods
 
 app.get("/", function (req, res) {
   res.render("home");
@@ -92,7 +93,8 @@ app.get("/vote", function (req, res) {
   
     })
   }else{
-    res.render("redirect",{msg : "you need to login first! please click the login button bellow"});
+    const link = "/login";
+    res.render("redirect",{msg : "you need to login first! please click the login button bellow",link:link, button_name:"Log In"});
   }  
 });
 
@@ -104,10 +106,22 @@ app.get("/c_register", function (req, res) {
   res.render("c_register");
 });
 
-app.get("/alert",function(req,res){
-  res.render("alert",{msg: "you have already voted"});
+app.get("/results", function (req, res) {
+  Vote.find({},function(err,votes){  
+    if(err){
+      console.log(err);
+    }
+    const voteArrays = getVotes(votes);
+
+    res.render("results", {votes : voteArrays });
+
+  })
 });
 
+
+
+
+//post methods
 
 app.post("/vote", function (req, res) {
 
@@ -146,22 +160,13 @@ app.post("/vote", function (req, res) {
   });
 
   }else{
+    const link = "/results";
      
-    res.redirect('/alert');
+    res.render("redirect",{msg:"you have already voted",link:link,button_name:"Results"});
   }
 });  
   
-app.get("/results", function (req, res) {
-  Vote.find({},function(err,votes){  
-    if(err){
-      console.log(err);
-    }
-    const voteArrays = getVotes(votes);
 
-    res.render("results", {votes : voteArrays });
-
-  })
-});
 
 
 app.post("/register", function (req, res) {
@@ -195,10 +200,12 @@ app.post("/login", function (req, res) {
           currentUser = foundUser;
           res.redirect("/vote");
         } else {
-          res.render("redirect",{msg : "Incorrect password! please try again."});
+          const link = "/login";
+          res.render("redirect",{msg : "Incorrect password! please try again.", link:link,button_name:"Log In"});
         }
       } else {
-        res.render("redirect",{msg : "User not defined! please check your username and password again."});
+        const link = "/login";
+        res.render("redirect",{msg : "User not defined! please check your username and password again.",link:link,button_name:"Log In"});
       }
     }
   });
@@ -224,6 +231,10 @@ app.post("/c_register", function (req, res) {
   });
   
 });
+
+
+
+//server config
 
 let port = process.env.PORT;
 if (port == null || port == "") {
