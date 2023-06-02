@@ -123,6 +123,31 @@ app.get("/results", function (req, res) {
 
 
 //post methods
+app.post("/login", function (req, res) {
+  const NIC = req.body.NIC;
+  const password = req.body.password;
+
+  User.findOne({ NIC: NIC }, function (err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (foundUser) {
+        if (foundUser.password === password) {
+          isLogedIn = true;
+          currentUser = foundUser;
+          
+          res.redirect("/vote");
+        } else {
+          const link = "/login";
+          res.render("redirect",{msg : "Incorrect password! please try again.", link:link,button_name:"Log In"});
+        }
+      } else {
+        const link = "/login";
+        res.render("redirect",{msg : "User not defined! please check your username and password again.",link:link,button_name:"Log In"});
+      }
+    }
+  });
+});
 
 app.post("/vote", function (req, res) {
   console.log(currentUser);
@@ -192,31 +217,7 @@ app.post("/register", function (req, res) {
   });
 });
 
-app.post("/login", function (req, res) {
-  const NIC = req.body.NIC;
-  const password = req.body.password;
 
-  User.findOne({ NIC: NIC }, function (err, foundUser) {
-    if (err) {
-      console.log(err);
-    } else {
-      if (foundUser) {
-        if (foundUser.password === password) {
-          isLogedIn = true;
-          currentUser = foundUser;
-          
-          res.redirect("/vote",{currentUser:currentUser});
-        } else {
-          const link = "/login";
-          res.render("redirect",{msg : "Incorrect password! please try again.", link:link,button_name:"Log In"});
-        }
-      } else {
-        const link = "/login";
-        res.render("redirect",{msg : "User not defined! please check your username and password again.",link:link,button_name:"Log In"});
-      }
-    }
-  });
-});
 
 app.post("/c_register", function (req, res) {
   const newValue = req.body.qualification.replace(/\n/g, '');
