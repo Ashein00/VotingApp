@@ -46,7 +46,7 @@ const voteSchema = {
   party: String,
   vote1: String,
   vote2: String,
-  Vote3: String,
+  vote3: String,
 };
 
 const candidateSchema = {
@@ -144,13 +144,6 @@ app.post("/vote", function (req, res) {
               throw new Error('User not found');
             }
           })
-          .then(updatedUser => {
-            console.log('User updated successfully:', updatedUser);
-          })
-          .catch(error => {
-            console.error('Error updating user:', error);
-          });
-
 
       res.redirect("/vote");
       }
