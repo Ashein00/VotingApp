@@ -81,6 +81,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", function (req, res) {
+  console.log(currentUser);
   if (isLogedIn){
    
     Candidate.find({},function(err,cands){
@@ -150,7 +151,7 @@ app.post("/login", function (req, res) {
 });
 
 app.post("/vote", function (req, res) {
-  console.log(currentUser);
+  
   if(currentUser.voted ==false){
 
     const vote = req.body.myCheckbox;
