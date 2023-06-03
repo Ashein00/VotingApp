@@ -1,42 +1,44 @@
 <%- include('header') %>
 
-<main>
-  <!-- <h1 class="greeting">Hello! <%=user%></h1> -->
+<main class= "vote-page"> 
 
-  <div class="vote-section">
-    <div class="tab">
-      <% for(var k=0; k < parties.length; k++) { %> 
-      <% var myArray =JSON.stringify(parties[k]); %>
-      <button
-        class="tablinks <%=parties[k][0].party%>"
-        onclick="openTab(event,'<%= myArray %>')"
-      >
-        <%=parties[k][0].party%>
-      </button>
+  <!-- tab section -->
+  <% for(var k=0; k < parties.length; k++) { %> 
+    <% var myArray =JSON.stringify(parties[k]);%>
+    <button
+      class="tablink"
+      onclick="openTab(event,'<%=parties[k][0].party%>',this)"
+    >
+      <%=parties[k][0].party%>
+    </button>
+  <% } %>
 
-      <% } %>
+  <!-- content -->
+  
+  <% for(var i=0; i < parties.length; i++) { %> 
+    <div class="tabcontent" id="<%=parties[i][0].party%>">
+      <form id="voting_form" action="/vote" method="post" autocomplete="off">
+        <% for(var j=0; j < parties[i].length; j++) { %>
+          <div id="<%=parties[i][j].name%>" class="candidate-info">
+            <h3 class="name"><%=parties[i][j].name%></h3>
+            <p class="qualifications"><%=parties[i][j].qualifications%></p>
+            <p class="number"><%=parties[i][j].voting_number%></p>
+            <div class="checkbox-container">
+              <input
+                type="checkbox"
+                name="myCheckbox"
+                value="<%=parties[i][j].party%>|<%=parties[i][j].name%>|<%=parties[i][j].voting_number%>"
+                id="<%=parties[i][j].name%>"
+              />
+            </div>
+          </div>
+        <% } %>
+
+        <button type="submit">CONFIRM</button>
+      </form>
     </div>
-
-    <form id="voting_form" action="/vote" method="post" autocomplete="off">
-      <% for(var i=0; i < parties.length; i++) { %> <% for(var j=0; j <
-      parties[i].length; j++) { %>
-      <div id="<%=parties[i][j].name%>" class="tabcontent candidate-info">
-        <h3 class="name"><%=parties[i][j].name%></h3>
-        <p class="qualifications"><%=parties[i][j].qualifications%></p>
-        <p class="number"><%=parties[i][j].voting_number%></p>
-        <div class="checkbox-container">
-          <input
-            type="checkbox"
-            name="myCheckbox"
-            value="<%=parties[i][j].party%>|<%=parties[i][j].name%>|<%=parties[i][j].voting_number%>"
-            id="<%=parties[i][j].name%>"
-          />
-        </div>
-      </div>
-      <% } %> <% } %>
-      <button type="submit">CONFIRM</button>
-    </form>
-  </div>
+  <% } %>
+  
 </main>
 
 

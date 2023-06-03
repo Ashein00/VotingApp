@@ -4,48 +4,42 @@ $(function () {
   }, 1000);
 });
 
-const partyNames = ["Democratic Party","Republican Party","Labour Party","Liberal Party"];
-var colArray = ["#8f1e1e","#b4ad48","#18851d","#34286b"] ;
+const getColor = {"Democratic Party":"#8f1e1e",
+                  "Republican Party":"#b4ad48",
+                  "Labour Party":"#18851d",
+                  "Liberal Party":"#34286b" };
 
-//for (var i=0;i<4;i++){
- // document.getElementByClassName("Democratic").s = "red";
-  // console.log(document.getElementByClassName("Democratic"))
-//} 
 
-  function openTab(evt, partyName) {
-    // Declare all variables
-    var i, tabcontent, tablinks;
+// ============================= voting page =============================
 
-    const array = partyName.replace(/[\n\r]/g, '');
-    
-    var parties = JSON.parse(array);
-    
-    const checked = document.querySelectorAll('input[type="checkbox"][name="myCheckbox"]:checked');
-    
-    for(var j =0 ; j<checked.length;j++){
-      checked[i].checked = false;
-    }
+document.getElementsByClassName("tablink")[0].click();
+
+function openTab(evt,partyName,ele) {
+
+  var i, tabcontent, tablinks;
+
+  const checked = document.querySelectorAll('input[type="checkbox"][name="myCheckbox"]:checked');
   
+  for(var j =0 ; j<checked.length;j++){
+    checked[i].checked = false;
+  }
 
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-      
-    }
-  
-    // // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-  
-    // Show the current tab, and add an "active" class to the link that opened the tab
-    for(i=0;i<parties.length;i++){
-      document.getElementById(parties[i].name).style.display = "block";
-      
-     
-    }
+  // Get all elements with class tabcontent and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove background color
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+
+  // Show the current tab and set color
+  document.getElementById(partyName).style.display = "block";
+  ele.style.backgroundColor = getColor[partyName];
+
 
   const maxCheckboxes = 3;
 
@@ -55,16 +49,16 @@ var colArray = ["#8f1e1e","#b4ad48","#18851d","#34286b"] ;
   );
 
     // Add event listeners to each checkbox
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
         // Get the number of currently checked checkboxes
         const checkedCount = document.querySelectorAll('input[type="checkbox"][name="myCheckbox"]:checked').length;
         
 
-        // Check if the maximum limit has been reached
-        if (checkedCount > maxCheckboxes) {
-          this.checked = false; // Uncheck the current checkbox
-        }
+      // Check if the maximum limit has been reached
+      if (checkedCount > maxCheckboxes) {
+        this.checked = false; // Uncheck the current checkbox
+      }
 
       // Disable additional checkboxes if the maximum limit has been reached
       checkboxes.forEach((cb) => {
@@ -76,7 +70,7 @@ var colArray = ["#8f1e1e","#b4ad48","#18851d","#34286b"] ;
   evt.currentTarget.className += " active";
 }
 
-// candidate register site
+// ===================== candidate register site ===========================
 
 var current_fs, next_fs, previous_fs;
 var left, opacity, scale;
