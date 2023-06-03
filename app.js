@@ -5,7 +5,15 @@ const getVotes = require("./public/scripts/getVotes");
 const connectDatabase = require("./config/dbconfig");
 
 var isLogedIn = false;
-var currentUser = null;
+var currentUser;
+
+// <-- database connection -->
+
+connectDatabase();
+
+const conn_str =
+  "mongodb+srv://sanjueranga:A8D0iBJyKqXgTtYy@cluster0.rl958vp.mongodb.net/?retryWrites=true&w=majority";
+
 
 
 connectDatabase();
@@ -34,9 +42,11 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", async function (req, res) {
+  console.log(currentUser);
   if (isLogedIn){
     try {
-      const cands = await Candidate.find({});
+     
+    const cands = await Candidate.find({});
       const partyArrays = getParties(cands);  
     
       res.render("vote", { user: currentUser, parties: partyArrays });
@@ -77,9 +87,34 @@ app.get("/results", async function (req, res) {
 
 
 //post methods
+app.post("/login", function (req, res) {
+  const NIC = req.body.NIC;
+  const password = req.body.password;
+
+  User.findOne({ NIC: NIC }, function (err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (foundUser) {
+        if (foundUser.password === password) {
+          isLogedIn = true;
+          currentUser = foundUser;
+          
+          res.redirect("/vote");
+        } else {
+          const link = "/login";
+          res.render("redirect",{msg : "Incorrect password! please try again.", link:link,button_name:"Log In"});
+        }
+      } else {
+        const link = "/login";
+        res.render("redirect",{msg : "User not defined! please check your username and password again.",link:link,button_name:"Log In"});
+      }
+    }
+  });
+});
 
 app.post("/vote", async function (req, res) {
-  if (currentUser.voted == false) {
+  console.log(currentUser);  if (currentUser.voted == false) {
     try {
       const vote = req.body.myCheckbox;
       const [vote1, vote2, vote3] = vote;
@@ -141,32 +176,25 @@ app.post("/login", async function (req, res) {
     const NIC = req.body.NIC;
     const password = req.body.password;
 
-    const foundUser = await User.findOne({ NIC: NIC });
-
-    if (foundUser) {
-      if (foundUser.password === password) {
-        isLogedIn = true;
-        currentUser = foundUser;
-        res.redirect("/vote");
+  User.findOne({ NIC: NIC }, function (err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (foundUser) {
+        if (foundUser.password === password) {
+          isLogedIn = true;
+          currentUser = foundUser;
+          res.redirect("/vote");
+        } else {
+          const link = "/login";
+          res.render("redirect",{msg : "Incorrect password! please try again.", link:link,button_name:"Log In"});
+        }
       } else {
         const link = "/login";
-        res.render("redirect", {
-          msg: "Incorrect password! Please try again.",
-          link: link,
-          button_name: "Log In"
-        });
+        res.render("redirect",{msg : "User not defined! please check your username and password again.",link:link,button_name:"Log In"});
       }
-    } else {
-      const link = "/login";
-      res.render("redirect", {
-        msg: "User not defined! Please check your username and password again.",
-        link: link,
-        button_name: "Log In"
-      });
     }
-  } catch (err) {
-    console.log(err);
-  }
+  });
 });
 
 
