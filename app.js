@@ -5,7 +5,8 @@ const getParties = require("./public/scripts/getParties");
 const getVotes = require("./public/scripts/getVotes");
 
 var isLogedIn = false;
-var currentUser = null;
+var currentUser;
+
 
 // <-- database connection -->
 
@@ -46,7 +47,7 @@ const voteSchema = {
   vote1: String,
   vote2: String,
   vote3: String,
-  vote3: String,
+  vote3: String
 };
 
 const candidateSchema = {
@@ -70,6 +71,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
+//get methods
 
 app.get("/", function (req, res) {
   res.render("home");
@@ -92,7 +94,8 @@ app.get("/vote", function (req, res) {
   
     })
   }else{
-    res.render("redirect",{msg : "you need to login first! please click the login button bellow"});
+    const link = "/login";
+    res.render("redirect",{msg : "you need to login first! please click the login button bellow",link:link, button_name:"Log In"});
   }  
 });
 
@@ -104,54 +107,6 @@ app.get("/c_register", function (req, res) {
   res.render("c_register");
 });
 
-app.get("/alert",function(req,res){
-  res.render("alert",{msg: "you have already voted"});
-});
-
-
-app.post("/vote", function (req, res) {
-
-  if(currentUser.voted ==false){
-
-    const vote = req.body.myCheckbox;
-
-    const [vote1,vote2,vote3] = vote;
-
-    const party = vote1.split('|')[0];
-    const newVote = new Vote({
-     NIC: currentUser.NIC,
-     party:party,
-     vote: vote,
-     vote1:vote1,
-     vote2:vote2,
-     vote3:vote3
-
-    });
-    newVote.save(function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        currentUser.voted = true;
-        User.findOne({ NIC: currentUser.NIC })
-          .then(user => {
-            if (user) {
-              user.voted = true; // Update the age to 30
-              return user.save(); // Save the changes
-            } else {
-              throw new Error('User not found');
-            }
-          })
-
-      res.redirect("/vote");
-      }
-  });
-
-  }else{
-     
-    res.redirect('/alert');
-  }
-});  
-  
 app.get("/results", function (req, res) {
   Vote.find({},function(err,votes){  
     if(err){
@@ -163,6 +118,86 @@ app.get("/results", function (req, res) {
 
   })
 });
+
+
+
+
+//post methods
+app.post("/login", function (req, res) {
+  const NIC = req.body.NIC;
+  const password = req.body.password;
+
+  User.findOne({ NIC: NIC }, function (err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (foundUser) {
+        if (foundUser.password === password) {
+          isLogedIn = true;
+          currentUser = foundUser;
+          
+          res.redirect("/vote");
+        } else {
+          const link = "/login";
+          res.render("redirect",{msg : "Incorrect password! please try again.", link:link,button_name:"Log In"});
+        }
+      } else {
+        const link = "/login";
+        res.render("redirect",{msg : "User not defined! please check your username and password again.",link:link,button_name:"Log In"});
+      }
+    }
+  });
+});
+
+app.post("/vote", function (req, res) {
+  console.log(currentUser);
+  if(currentUser.voted ==false){
+
+    const vote = req.body.myCheckbox;
+
+    const [vote1,vote2,vote3] = vote;
+
+    const party = vote1.split('|')[0];
+    const newVote = new Vote({
+     NIC: currentUser.NIC,
+     party:party,
+     vote1:vote1,
+     vote2:vote2,
+     vote3:vote3
+
+    });
+    newVote.save(function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        if(currentUser){
+          currentUser.voted = true;
+          User.findOne({ NIC: currentUser.NIC })
+            .then(user => {
+              if (user) {
+                user.voted = true;
+                return user.save();
+              } else {
+                throw new Error('User not found');
+              }
+            })
+  
+        res.redirect("/vote");
+        }else{
+          res.redirect("/");
+        }
+        }
+      
+  });
+
+  }else{
+    const link = "/results";
+     
+    res.render("redirect",{msg:"you have already voted",link:link,button_name:"Results"});
+  }
+});  
+  
+
 
 
 app.post("/register", function (req, res) {
@@ -182,28 +217,7 @@ app.post("/register", function (req, res) {
   });
 });
 
-app.post("/login", function (req, res) {
-  const NIC = req.body.NIC;
-  const password = req.body.password;
 
-  User.findOne({ NIC: NIC }, function (err, foundUser) {
-    if (err) {
-      console.log(err);
-    } else {
-      if (foundUser) {
-        if (foundUser.password === password) {
-          isLogedIn = true;
-          currentUser = foundUser;
-          res.redirect("/vote");
-        } else {
-          res.render("redirect",{msg : "Incorrect password! please try again."});
-        }
-      } else {
-        res.render("redirect",{msg : "User not defined! please check your username and password again."});
-      }
-    }
-  });
-});
 
 app.post("/c_register", function (req, res) {
   const newValue = req.body.qualification.replace(/\n/g, '');
@@ -225,6 +239,10 @@ app.post("/c_register", function (req, res) {
   });
   
 });
+
+
+
+//server config
 
 let port = process.env.PORT;
 if (port == null || port == "") {
