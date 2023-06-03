@@ -11,13 +11,6 @@ var currentUser;
 
 connectDatabase();
 
-const conn_str =
-  "mongodb+srv://sanjueranga:A8D0iBJyKqXgTtYy@cluster0.rl958vp.mongodb.net/?retryWrites=true&w=majority";
-
-
-
-connectDatabase();
-
 const User = require("./Models/user");
 const Candidate = require("./Models/candidate");
 const Vote = require("./Models/vote");
@@ -30,6 +23,10 @@ app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
+
+
+
+
 
 //get methods
 
@@ -87,31 +84,6 @@ app.get("/results", async function (req, res) {
 
 
 //post methods
-app.post("/login", function (req, res) {
-  const NIC = req.body.NIC;
-  const password = req.body.password;
-
-  User.findOne({ NIC: NIC }, function (err, foundUser) {
-    if (err) {
-      console.log(err);
-    } else {
-      if (foundUser) {
-        if (foundUser.password === password) {
-          isLogedIn = true;
-          currentUser = foundUser;
-          
-          res.redirect("/vote");
-        } else {
-          const link = "/login";
-          res.render("redirect",{msg : "Incorrect password! please try again.", link:link,button_name:"Log In"});
-        }
-      } else {
-        const link = "/login";
-        res.render("redirect",{msg : "User not defined! please check your username and password again.",link:link,button_name:"Log In"});
-      }
-    }
-  });
-});
 
 app.post("/vote", async function (req, res) {
   console.log(currentUser);  if (currentUser.voted == false) {
@@ -176,26 +148,34 @@ app.post("/login", async function (req, res) {
     const NIC = req.body.NIC;
     const password = req.body.password;
 
-  User.findOne({ NIC: NIC }, function (err, foundUser) {
-    if (err) {
-      console.log(err);
-    } else {
-      if (foundUser) {
-        if (foundUser.password === password) {
-          isLogedIn = true;
-          currentUser = foundUser;
-          res.redirect("/vote");
-        } else {
-          const link = "/login";
-          res.render("redirect",{msg : "Incorrect password! please try again.", link:link,button_name:"Log In"});
-        }
+    const foundUser = await User.findOne({ NIC: NIC });
+
+    if (foundUser) {
+      if (foundUser.password === password) {
+        isLogedIn = true;
+        currentUser = foundUser;
+        res.redirect("/vote");
       } else {
         const link = "/login";
-        res.render("redirect",{msg : "User not defined! please check your username and password again.",link:link,button_name:"Log In"});
+        res.render("redirect", {
+          msg: "Incorrect password! Please try again.",
+          link: link,
+          button_name: "Log In"
+        });
       }
+    } else {
+      const link = "/login";
+      res.render("redirect", {
+        msg: "User not defined! Please check your username and password again.",
+        link: link,
+        button_name: "Log In"
+      });
     }
-  });
+  } catch (err) {
+    console.log(err);
+  }
 });
+
 
 
 app.post("/c_register", async function (req, res) {
