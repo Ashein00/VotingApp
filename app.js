@@ -39,7 +39,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", async function (req, res,currentUser) {
-  console.log(currentUser);
+  
   if (isLogedIn){
     try {
      
@@ -86,7 +86,7 @@ app.get("/results", async function (req, res) {
 //post methods
 
 app.post("/vote", async function (req, res,currentUser) {
-  console.log(currentUser);  
+
   if (currentUser.voted == false) {
     try {
       const vote = req.body.myCheckbox;
