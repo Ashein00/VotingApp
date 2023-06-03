@@ -1,14 +1,14 @@
 <%- include('header') %>
 
 <main>
-  <h1>Hello... <%=user.name%></h1>
-  <div class="top-section">
+  <!-- <h1 class="greeting">Hello! <%=user%></h1> -->
+
+  <div class="vote-section">
     <div class="tab">
-      <% for(var k=0; k < parties.length; k++) { %> <% var myArray =
-      JSON.stringify(parties[k]); %>
+      <% for(var k=0; k < parties.length; k++) { %> 
+      <% var myArray =JSON.stringify(parties[k]); %>
       <button
-        id="<%=parties[k][0].party%>"
-        class="tablinks"
+        class="tablinks <%=parties[k][0].party%>"
         onclick="openTab(event,'<%= myArray %>')"
       >
         <%=parties[k][0].party%>
@@ -38,5 +38,6 @@
     </form>
   </div>
 </main>
+
 
 <%- include('footer') %>

@@ -4,6 +4,13 @@ $(function () {
   }, 1000);
 });
 
+const partyNames = ["Democratic Party","Republican Party","Labour Party","Liberal Party"];
+var colArray = ["#8f1e1e","#b4ad48","#18851d","#34286b"] ;
+
+//for (var i=0;i<4;i++){
+ // document.getElementByClassName("Democratic").s = "red";
+  // console.log(document.getElementByClassName("Democratic"))
+//} 
 
   function openTab(evt, partyName) {
     // Declare all variables
@@ -144,4 +151,3 @@ $(".previous").click(function () {
   );
 });
 
-// result page
