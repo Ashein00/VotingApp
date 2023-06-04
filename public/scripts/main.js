@@ -12,7 +12,15 @@ const getColor = {"Democratic Party":"#8f1e1e",
 
 // ============================= voting page =============================
 
-document.getElementsByClassName("tablink")[0].click();
+// document.getElementsByClassName("tablink")[0].click();
+
+window.addEventListener('DOMContentLoaded', function() {
+  var tablinks = document.getElementsByClassName("tablink");
+  if (tablinks.length > 0) {
+    tablinks[0].click();
+  }
+});
+
 
 function openTab(evt,partyName,ele) {
 
@@ -70,13 +78,21 @@ function openTab(evt,partyName,ele) {
   evt.currentTarget.className += " active";
 }
 
+
+
+
+
+
 // ===================== candidate register site ===========================
 
 var current_fs, next_fs, previous_fs;
 var left, opacity, scale;
 var animating;
 
+
 $(".next").click(function () {
+
+  
   if (animating) return false;
   animating = true;
 
