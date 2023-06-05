@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    color: #ededed;
+    background: #2A2F4F;
+  }
+  
+  /* header */
+  
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 10%;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  .logo {
+    position: absolute;
+    font-size: 25px;
+    color: #ededed;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 70px;
+  }
+  
+  .logo:hover {
+    color: #8971b7;
+  }
+  
+  .logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #2A2F4F;
+    animation: showRight 1s ease forwards;
+    animation-delay: 0.4s;
+  }
+  
+  .navbar a {
+    font-size: 17px;
+    color: #ededed;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 35px;
+    transition: .3s;
+  }
+  
+  .navbar a:hover,
+  .navbar a.active {
+    color: #8971b7;
+  }
+  
+  .button-33 {
+    background-color: #7257a3;
+    border-radius: 20px;
+    color: #FDE2F3;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 17px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-33:hover {
+    transform: scale(1.05);
+    color: #2A2F4F;
+  }
+  
+  /* section - home */
+  
+  .home {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    padding: 0 10%;
+    /* background: url('vote box.png') no-repeat; */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .home-content {
+    max-width: 600px;
+  }
+  
+  .home-content h1 {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  
+  .home-content h3 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #9173ce;
+  }
+  
+  .home-content p {
+    font-size: 18px;
+    margin: 20px 0 40px;
+  }
+  
+  .home-content .btn-box {
+    display: flex;
+    justify-content: space-between;
+    width: 345px;
+    height: 50px;
+  }
+  
+  .c-reg-btn {
+    padding-left: 16px;
+  }
+  
+  .v-reg-btn {
+    margin-left: 320px;
+    padding-left: 46px;
+  }
+  
+  .btn-box a {
+    position: absolute;
+    width: 270px;
+    height: 40px;
+    background: #9173ce;
+    border: 2px solid #9173ce;
+    border-radius: 20px;
+    display: inline-flex;
+    font-size: 20px;
+    color: #2A2F4F;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    /* justify-content: center; */
+    align-items: center;
+    z-index: 1;
+    overflow: hidden;
+    transition: 0.3s;
+  }
+  
+  .btn-box a:hover {
+    color: #9173ce;
+  }
+  
+  .btn-box a:nth-child(2) {
+    background: transparent;
+    color: #9173ce;
+  }
+  
+  .btn-box a:nth-child(2):hover {
+    color: #2A2F4F;
+  } 
+  
+  .btn-box a:nth-child(2)::before {
+    background: #9173ce;
+  }
+  
+  .btn-box a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #2A2F4F;
+    z-index: -1;
+    transition: 0.3s;
+  }
+  
+  .btn-box a:hover:before {
+    width: 100%;
+  }
+  
+  .v-btn {
+    padding-left: 185px;
+    /* margin-left: 45px; */
+  }
+  
+  .vote-btn a {
+    margin-left: 65px;
+    position: absolute;
+    width: 450px;
+    height: 50px;
+    /* background: #00abf0; */
+    background: transparent;
+    border: 2px solid #9db1c0;
+    border-radius: 30px;
+    display: inline-flex;
+    font-size: 22px;
+    color: #9db1c0;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 8px;
+    /* justify-content: center; */
+    align-items: center;
+    z-index: 1;
+    overflow: hidden;
+    transition: 0.3s;
+  }
+  
+  .vote-btn a:hover {
+    color: #9173ce;
+    transform: scale(1.05);
+  }
+  
+  .r-btn {
+    padding-left: 158px;
+    /* margin-left: 45px; */
+  }
+  
+  .side-img {
+    position: absolute;
+    height: 305px;
+    width: 450px;
+    margin-left: 760px;
+    margin-top: 80px;
+    filter: brightness(70%);
+    border-radius: 20px;
+  }
+  
+  /* keyframe animation */
+
+@keyframes showRight {
+    100% {
+        width: 0;
+    }
+  }
