@@ -184,6 +184,7 @@ app.post("/c_register", async function (req, res) {
     const newValue = req.body.qualification.replace(/\n/g, '');
     const newCandidate = new Candidate({
       name: req.body.fname + " " + req.body.lname,
+      gender:req.body.gender,
       qualifications: newValue,
       party: req.body.party,
       voting_number: req.body.voting_number
