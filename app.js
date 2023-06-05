@@ -40,7 +40,7 @@ app.get("/login", function (req, res) {
 
 app.get("/vote", async function (req, res,currentUser) {
   
-  if (isLogedIn){
+  if (!isLogedIn){
     try {
      
     const cands = await Candidate.find({});

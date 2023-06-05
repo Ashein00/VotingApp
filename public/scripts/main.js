@@ -12,7 +12,9 @@ const getColor = {"Democratic Party":"#8f1e1e",
 
 // ============================= voting page =============================
 
-document.getElementsByClassName("tablink")[0].click();
+function defaultclick(){
+  document.getElementsByClassName("tablink")[0].click();
+}
 
 function openTab(evt,partyName,ele) {
 
@@ -39,7 +41,7 @@ function openTab(evt,partyName,ele) {
   // Show the current tab and set color
   document.getElementById(partyName).style.display = "block";
   ele.style.backgroundColor = getColor[partyName];
-
+  document.getElementById(partyName).style.backgroundColor = getColor[partyName] ;
 
   const maxCheckboxes = 3;
 
@@ -69,6 +71,11 @@ function openTab(evt,partyName,ele) {
 
   evt.currentTarget.className += " active";
 }
+
+// $('.card').on('click', function(){
+//   var checkbox = $(this).children('input[type="checkbox"]');
+//   checkbox.prop('checked', !checkbox.prop('checked'));
+// });
 
 // ===================== candidate register site ===========================
 

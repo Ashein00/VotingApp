@@ -15,25 +15,34 @@
 
   <!-- content -->
   
-  <% for(var i=0; i < parties.length; i++) { %> 
+  <% for(var i=0; i < parties.length; i++) { %>
     <div class="tabcontent" id="<%=parties[i][0].party%>">
       <form id="voting_form" action="/vote" method="post" autocomplete="off">
-        <% for(var j=0; j < parties[i].length; j++) { %>
-          <div id="<%=parties[i][j].name%>" class="candidate-info">
-            <h3 class="name"><%=parties[i][j].name%></h3>
-            <p class="qualifications"><%=parties[i][j].qualifications%></p>
-            <p class="number"><%=parties[i][j].voting_number%></p>
-            <div class="checkbox-container">
-              <input
-                type="checkbox"
-                name="myCheckbox"
-                value="<%=parties[i][j].party%>|<%=parties[i][j].name%>|<%=parties[i][j].voting_number%>"
-                id="<%=parties[i][j].name%>"
-              />
+        <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+          <% for(var j=0; j < parties[i].length; j++) { %>
+            <div class="col">
+              <label for="<%=parties[i][j].name.split(" ")[0]%>">
+              <div id="<%=parties[i][j].name%>" class="card card-custom border-white border-1">
+                <div class="card-custom-img" style="background-image: url(http://res.cloudinary.com/d3/image/upload/c_scale,q_auto:good,w_1110/trianglify-v1-cs85g_cc5d2i.jpg);"></div>
+                <div class="card-custom-avatar">
+                  <img class="img-fluid" src="https://www.caiml.co.uk/wp-content/uploads/2016/03/270x270-male-avatar.png" alt="Avatar" />
+                </div>
+                <h3 class="name card-title"><%=parties[i][j].name%></h3>
+                <p class="number"><%=parties[i][j].voting_number%></p>
+                <p class="qualifications card-body"><%=parties[i][j].qualifications%></p>
+                <div class="checkbox-container card-footer">
+                  <input
+                    type="checkbox"
+                    name="myCheckbox"
+                    value="<%=parties[i][j].party%>|<%=parties[i][j].name%>|<%=parties[i][j].voting_number%>"
+                    id="<%=parties[i][j].name.split(" ")[0]%>"
+                  />
+                </div>
+              </div>
+            </label>
             </div>
-          </div>
-        <% } %>
-
+          <% } %>
+        </div>
         <button type="submit">CONFIRM</button>
       </form>
     </div>
