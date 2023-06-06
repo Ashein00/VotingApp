@@ -412,18 +412,60 @@ a.discrete:hover {
   
 }
 
-
 #msform #creg-age {
-  width: 50% ;
-  margin-right: 10rem; 
-  padding: 0.8rem;
+  width: 40% ;
+}
+
+.selectdiv {
+  width: 40%;
+  display: inline-block;
+}
+
+.selectdiv label {
+  width: 100%;
+}
+
+.selectdiv select::-ms-expand {
+  display: none;
+}
+  
+.selectdiv:after {
+  content: '<>';
+  font: 17px "Consolas", monospace;
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 45px; 
+  top: 18px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #999;
+  position: absolute;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0.5px solid #ccc;
+	border-radius: 5px;
+	margin-bottom: 10px;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #340552;
+	font-size: 14px;
+  background-color: #ffffff;
+
 }
 
 #msform textarea {
   padding: 0;
 }
 
-#msform select {
+#msform #party {
   margin: 1rem;
   padding: 0.5rem;
   border: #340552;
