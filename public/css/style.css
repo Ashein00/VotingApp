@@ -227,7 +227,7 @@ a.discrete:hover {
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  font-size: 17px;
+  font-size: min(2vw, 17px) ;
   width: 25%;
 }
 
@@ -244,13 +244,14 @@ a.discrete:hover {
 
 .card-custom {
   overflow: hidden;
-  min-height: 450px;
+  height: 28em;
+  min-height: 28em;
   box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
 }
 
 .card-custom-img {
-  height: 200px;
-  min-height: 200px;
+  height: 12.5em;
+  min-height: 12.5em;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -284,6 +285,49 @@ a.discrete:hover {
   left: 1.25rem;
   width: 100px;
   height: 100px;
+}
+
+.checkbox-wrapper-62 input[type="checkbox"] {
+  visibility: hidden;
+  display: none;
+}
+
+.checkbox-wrapper-62 *,
+.checkbox-wrapper-62 ::after,
+.checkbox-wrapper-62 ::before {
+  box-sizing: border-box;
+}
+
+.checkbox-wrapper-62 {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.checkbox-wrapper-62 .check {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  opacity: 0;
+}
+.checkbox-wrapper-62 .label svg {
+  vertical-align: middle;
+}
+.checkbox-wrapper-62 .path1 {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: .5s all;
+}
+.checkbox-wrapper-62 .check:checked + label svg g path {
+  stroke-dashoffset: 0;
+}
+
+.number {
+  margin-bottom: 0px;
+}
+
+.card-footer {
+  background: inherit;
+  border-color: inherit;
 }
 
 /* redirect page */
