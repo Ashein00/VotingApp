@@ -14,7 +14,18 @@
           <h3 class="fs-subtitle">enter your personal details:</h3>
           <input type="text" name="fname" placeholder="First Name" />
           <input type="text" name="lname" placeholder="Last Name" />
-          <input type="number" id="creg-age" max="120" min="45" name="age" placeholder="Age" />
+          <div style="position: relative;">
+            <input type="number" id="creg-age" max="120" min="45" name="age" placeholder="Age" />
+            <div class="selectdiv">
+              <label>
+                  <select required name="gender">
+                    <option disabled selected value="">gender</option>
+                    <option value="Male">male</option>
+                    <option value="Female">Female</option>
+                  </select>
+              </label>
+            </div>
+          </div>
           <input type="button"  name="next" class="next action-button" value="Next" />
           
         </fieldset>

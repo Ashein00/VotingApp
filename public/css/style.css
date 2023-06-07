@@ -11,6 +11,12 @@ header {
   margin-top: 7px;
 }
 
+.logo-circle {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 7px;
+}
+
 .navbar-brand {
   margin-left: 10px;
 }
@@ -19,6 +25,8 @@ header {
   color: #fff2fa;
   font-family: "Anton", sans-serif;
   font-size: 2rem;
+  margin-left: 65px;
+  text-decoration: none;
   margin-left: 65px;
   text-decoration: none;
 }
@@ -257,7 +265,7 @@ a.discrete:hover {
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  font-size: 17px;
+  font-size: min(2vw, 17px) ;
   width: 25%;
 }
 
@@ -266,19 +274,98 @@ a.discrete:hover {
 }
 
 .tabcontent {
-  color: rgb(0, 0, 0);
+  color: #000000;
   display: none;
   padding: 100px 20px;
   height: 100%;
 }
 
-.candidate-info {
-  float: left;
-  padding: 0px 12px;
-  border: 1px solid #ccc;
-  width: 70%;
-  border-left: none;
-  height: 300px;
+.card-custom {
+  overflow: hidden;
+  height: 28em;
+  min-height: 28em;
+  box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+}
+
+.card-custom-img {
+  height: 12.5em;
+  min-height: 12.5em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-color: inherit;
+}
+
+.card-custom-img::after {
+  position: absolute;
+  content: '';
+  top: 161px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-top-width: 40px;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 545px;
+  border-left-width: calc(575px - 5vw);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: inherit;
+}
+
+.card-custom-avatar img {
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+  position: absolute;
+  top: 100px;
+  left: 1.25rem;
+  width: 100px;
+  height: 100px;
+}
+
+.checkbox-wrapper-62 input[type="checkbox"] {
+  visibility: hidden;
+  display: none;
+}
+
+.checkbox-wrapper-62 *,
+.checkbox-wrapper-62 ::after,
+.checkbox-wrapper-62 ::before {
+  box-sizing: border-box;
+}
+
+.checkbox-wrapper-62 {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.checkbox-wrapper-62 .check {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  opacity: 0;
+}
+.checkbox-wrapper-62 .label svg {
+  vertical-align: middle;
+}
+.checkbox-wrapper-62 .path1 {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: .5s all;
+}
+.checkbox-wrapper-62 .check:checked + label svg g path {
+  stroke-dashoffset: 0;
+}
+
+.number {
+  margin-bottom: 0px;
+}
+
+.card-footer {
+  background: inherit;
+  border-color: inherit;
 }
 
 /* ======================= Redirect Page =======================*/
@@ -409,16 +496,59 @@ a.discrete:hover {
 }
 
 #msform #creg-age {
-  width: 50% ;
-  margin-right: 10rem; 
-  padding: 0.8rem;
+  width: 40% ;
+}
+
+.selectdiv {
+  width: 40%;
+  display: inline-block;
+}
+
+.selectdiv label {
+  width: 100%;
+}
+
+.selectdiv select::-ms-expand {
+  display: none;
+}
+  
+.selectdiv:after {
+  content: '<>';
+  font: 17px "Consolas", monospace;
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  right: 45px; 
+  top: 18px;
+  padding: 0 0 2px;
+  border-bottom: 1px solid #999;
+  position: absolute;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0.5px solid #ccc;
+	border-radius: 5px;
+	margin-bottom: 10px;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #340552;
+	font-size: 14px;
+  background-color: #ffffff;
+
 }
 
 #msform textarea {
   padding: 0;
 }
 
-#msform select {
+#msform #party {
   margin: 1rem;
   padding: 0.5rem;
   border: #340552;

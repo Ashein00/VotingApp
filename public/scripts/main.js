@@ -4,15 +4,13 @@ $(function () {
   }, 1000);
 });
 
-const getColor = {"Democratic Party":"#8f1e1e",
+const getColor = {"Democratic Party":"#18851d",
                   "Republican Party":"#b4ad48",
-                  "Labour Party":"#18851d",
+                  "Labour Party":"#8f1e1e",
                   "Liberal Party":"#34286b" };
 
 
 // ============================= voting page =============================
-
-// document.getElementsByClassName("tablink")[0].click();
 
 window.addEventListener('DOMContentLoaded', function() {
   var tablinks = document.getElementsByClassName("tablink");
@@ -20,7 +18,6 @@ window.addEventListener('DOMContentLoaded', function() {
     tablinks[0].click();
   }
 });
-
 
 function openTab(evt,partyName,ele) {
 
@@ -47,7 +44,7 @@ function openTab(evt,partyName,ele) {
   // Show the current tab and set color
   document.getElementById(partyName).style.display = "block";
   ele.style.backgroundColor = getColor[partyName];
-
+  document.getElementById(partyName).style.backgroundColor = getColor[partyName] ;
 
   const maxCheckboxes = 3;
 
@@ -77,11 +74,6 @@ function openTab(evt,partyName,ele) {
 
   evt.currentTarget.className += " active";
 }
-
-
-
-
-
 
 // ===================== candidate register site ===========================
 
