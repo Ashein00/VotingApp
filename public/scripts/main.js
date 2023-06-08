@@ -5,7 +5,7 @@ $(function () {
 });
 
 const getColor = {"Democratic Party":"#18851d",
-                  "Republican Party":"#b4ad48",
+                  "Republican Party":"#885e0b",
                   "Labour Party":"#8f1e1e",
                   "Liberal Party":"#34286b" };
 

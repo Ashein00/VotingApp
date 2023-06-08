@@ -11,7 +11,7 @@
       <li>A voter is permitted to cast their vote only once, Hence it is not possible to revise or alter the vote once it has been submitted.</li>
   
     </ul>
-    <h3>VOTE FOR FUTURE!</h3>
+    <!-- <h3>VOTE FOR FUTURE!</h3> -->
   </section>
 
   <!-- tab section -->
@@ -28,19 +28,21 @@
 
   <!-- content -->
 
-  <% const partyImgURl = {"Democratic Party":"https://img.freepik.com/free-vector/silhouette-people-demonstration_23-2147997865.jpg?w=740&t=st=1686035927~exp=1686036527~hmac=db9f238bf03d7e3bcf6e078503820eae085d48255133e0e314a2d22aed4f0454",
-                          "Republican Party":"https://img.freepik.com/premium-vector/man-holding-flag-front-large-crowd-people-illustration_3890-407.jpg?w=740",
+  <% const partyImgURl = {"Democratic Party":"https://img.freepik.com/premium-vector/silhouette-protesting-crowd-with-flags-banners-appeal-representatives-state-power-change-political-situation-vecto_161534-244.jpg?w=826",
+                          "Republican Party":"https://img.freepik.com/premium-vector/manifestation-composition-with-silhouette-design_23-2147993853.jpg?w=740",
                           "Labour Party":"https://img.freepik.com/premium-vector/man-making-speech-audience-with-signboard-silhouette_18591-49042.jpg?w=740",
                           "Liberal Party":"https://img.freepik.com/free-vector/silhouette-crowd-people-with-flags-banners-manifestation_23-2148009668.jpg?w=740&t=st=1686038033~exp=1686038633~hmac=8a6824bf3083eccd9fa6e696c7bddd4175da9d7addf71fcdb555ba225e83938d" }  %>
+  
+  <% const colArr = ["#39ff14","#FF5733","#FF5733","#0FF0FC"] %>
   
   <% for(var i=0; i < parties.length; i++) { %>
     <div class="tabcontent" id="<%=parties[i][0].party%>">
       <form id="voting_form" action="/vote" method="post" autocomplete="off">
-        <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-1">
+        <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-1">
           <% for(var j=0; j < parties[i].length; j++) { %>
             <div class="col">
               <label for="<%=parties[i][j]._id%>">
-              <div id="<%=parties[i][j].name%>" class="card card-custom border-white border-1">
+              <div id="<%=parties[i][j].name%>" class="card card-custom border-light   border-1">
                 <div class="card-custom-img" style="background-image: url(<%=partyImgURl[parties[i][0].party]%>);"></div>
                 <div class="card-custom-avatar">
                   <% if (parties[i][j].gender === "Male"){ %>
@@ -54,7 +56,7 @@
 
                 <h1 class="number"><%=parties[i][j].voting_number%></h1>
 
-                <div class="card-body" style="overflow-y: auto">
+                <div class="card-body">
                   <p class="qualifications card-text"><%=parties[i][j].qualifications%></p>
                 </div>
 
@@ -75,7 +77,7 @@
             </div>
           <% } %>
         </div>
-        <button type="submit">CONFIRM</button>
+        <button type="submit" style="--clr:<%= colArr[i] %>"><span>Confirm</span><i></i></button>
       </form>
     </div>
   <% } %>
