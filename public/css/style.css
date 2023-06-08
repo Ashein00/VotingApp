@@ -235,6 +235,13 @@ header {
   opacity: 0.85;
 }
 
+.login-page h6 {
+  font-size: smaller;
+  font-weight: 300;
+  opacity: 0.85;
+  margin-bottom: 0;
+}
+
 .login-page span {
   color: #2A2F4F;
   font-weight: 400;
