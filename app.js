@@ -38,16 +38,16 @@ app.get("/login", function (req, res) {
   res.render("login");
 });
 
-app.get("/vote", async function (req, res,currentUser) {
+app.get("/vote", async function (req, res) {
   
-  if (!isLogedIn){
+  if (isLogedIn){
     try {
      
     const cands = await Candidate.find({});
-      const partyArrays = getParties(cands);  
+    const partyArrays = getParties(cands);  
     
-      res.render("vote", { user: currentUser, parties: partyArrays });
-    } catch (err) {
+    res.render("vote", { parties: partyArrays });
+  } catch (err) {
       console.log(err);
     }
   } else {
@@ -74,7 +74,7 @@ app.get("/results", async function (req, res) {
     const votes = await Vote.find({});
     const voteArrays = getVotes(votes);
 
-    res.render("results", { votes: voteArrays });
+    res.render("results", { user: currentUser, votes: voteArrays });
   } catch (err) {
     console.log(err);
   }
