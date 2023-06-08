@@ -2,6 +2,18 @@
 
 <main class= "vote-page"> 
 
+  <section class="guide">
+    <h1>voter guide</h1>
+    <ul>
+      <li>Each voter is entitled to a maximum of three votes, Each eligible voter has the right to cast vote and each vote carries equal weight.</li>
+      <li>Voters are restricted to casting their votes exclusively for candidates belonging to a single political party.</li>
+      <li>Prior to casting their vote, it is mandatory for voters to complete the registration process.</li>
+      <li>A voter is permitted to cast their vote only once, Hence it is not possible to revise or alter the vote once it has been submitted.</li>
+  
+    </ul>
+    <h3>VOTE FOR FUTURE!</h3>
+  </section>
+
   <!-- tab section -->
   <% for(var k=0; k < parties.length; k++) { %> 
     <% var myArray =JSON.stringify(parties[k]);%>
@@ -37,11 +49,15 @@
                     <img class="img-fluid" src="https://www.caiml.co.uk/wp-content/uploads/2016/03/270x270-female-avatar.png" alt="Avatar" />
                   <% } %>
                 </div>
+
                 <h3 class="name card-title"><%=parties[i][j].name%></h3>
-                <p class="number"><%=parties[i][j].voting_number%></p>
+
+                <h1 class="number"><%=parties[i][j].voting_number%></h1>
+
                 <div class="card-body" style="overflow-y: auto">
                   <p class="qualifications card-text"><%=parties[i][j].qualifications%></p>
                 </div>
+
                 <div class="checkbox-wrapper-62 card-footer">
                   <input type="checkbox" class="check" id="<%=parties[i][j]._id%>" name="myCheckbox" value="<%=parties[i][j].party%>|<%=parties[i][j].name%>|<%=parties[i][j].voting_number%>" />
                   <label for="<%=parties[i][j]._id%>" class="label">
