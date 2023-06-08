@@ -60,7 +60,6 @@ app.get("/vote", async function (req, res) {
   }  
 });
 
-
 app.get("/register", function (req, res) {
   res.render("register");
 });
@@ -81,12 +80,9 @@ app.get("/results", async function (req, res) {
 });
 
 
-
-
 //post methods
 
 app.post("/vote", async function (req, res,currentUser) {
-
   if (currentUser.voted == false) {
     try {
       const vote = req.body.myCheckbox;
@@ -125,8 +121,6 @@ app.post("/vote", async function (req, res,currentUser) {
     res.render("redirect",{msg:"you have already voted",link:link,button_name:"Results"});
   }
 });  
-  
-
 
 app.post("/register", async function (req, res) {
   try {
@@ -177,8 +171,6 @@ app.post("/login", async function (req, res) {
   }
 });
 
-
-
 app.post("/c_register", async function (req, res) {
   try {
     const newValue = req.body.qualification.replace(/\n/g, '');
@@ -196,8 +188,6 @@ app.post("/c_register", async function (req, res) {
     console.log(err);
   }
 });
-
-
 
 
 //server config
