@@ -11,6 +11,12 @@ header {
   margin-top: 7px;
 }
 
+.logo-circle {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 7px;
+}
+
 .navbar-brand {
   margin-left: 10px;
 }
@@ -19,6 +25,8 @@ header {
   color: #fff2fa;
   font-family: "Anton", sans-serif;
   font-size: 2rem;
+  margin-left: 65px;
+  text-decoration: none;
   margin-left: 65px;
   text-decoration: none;
 }
