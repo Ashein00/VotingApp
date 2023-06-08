@@ -9,12 +9,7 @@ header {
   position: absolute;
   margin-left: 15px;
   margin-top: 7px;
-}
-
-.logo-circle {
-  position: absolute;
-  margin-left: 15px;
-  margin-top: 7px;
+  border-radius: 50%;
 }
 
 .navbar-brand {
@@ -24,9 +19,7 @@ header {
 .header-text {
   color: #fff2fa;
   font-family: "Anton", sans-serif;
-  font-size: 2rem;
-  margin-left: 65px;
-  text-decoration: none;
+  font-size: 2.2rem;
   margin-left: 65px;
   text-decoration: none;
 }
@@ -41,14 +34,6 @@ header {
   justify-content: center;
   color: #fde2f3;
   margin-right: 10px;
-}
-
-.nav-link:hover {
-  color: #2A2F4F;
-}
-
-.nav-home {
-  color: #2A2F4F;
 }
 
 .button-33 {
@@ -75,6 +60,157 @@ header {
   color: #917fb3;
 }
 
+/* ======================= home page =======================*/
+
+.home {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding: 0 10%;
+  font-family: 'Poppins', sans-serif;
+  color: #ededed;
+  background-color: #2A2F4F;
+}
+
+.home-content {
+  max-width: 37.5rem;
+}
+
+.home-content h1 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.home-content h3 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #9173ce;
+}
+
+.home-content p {
+  font-size: 18px;
+  margin: 20px 0 40px;
+}
+
+.home-content .btn-box {
+  display: flex;
+  justify-content: space-between;
+  width: 345px;
+  height: 50px;
+}
+
+.c-reg-btn {
+  padding-left: 16px;
+}
+
+.v-reg-btn {
+  margin-left: 320px;
+  padding-left: 46px;
+}
+
+.home .btn-box a {
+  position: absolute;
+  width: 270px;
+  height: 40px;
+  background: #9173ce;
+  border: 2px solid #9173ce;
+  border-radius: 20px;
+  display: inline-flex;
+  font-size: 20px;
+  color: #2A2F4F;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  align-items: center;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.home .btn-box a:hover {
+  color: #9173ce;
+}
+
+.home .btn-box a:nth-child(2) {
+  background: transparent;
+  color: #9173ce;
+}
+
+.home .btn-box a:nth-child(2):hover {
+  color: #2A2F4F;
+} 
+
+.home .btn-box a:nth-child(2)::before {
+  background: #9173ce;
+}
+
+.home .btn-box a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #2A2F4F;
+  z-index: -1;
+  transition: 0.3s;
+}
+
+.home .btn-box a:hover:before {
+  width: 100%;
+}
+
+.home .v-btn {
+  padding-left: 185px;
+}
+
+.home .vote-btn a {
+  margin-left: 65px;
+  position: absolute;
+  width: 450px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #9db1c0;
+  border-radius: 30px;
+  display: inline-flex;
+  font-size: 22px;
+  color: #9db1c0;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 8px;
+  align-items: center;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.home .vote-btn a:hover {
+  color: #9173ce;
+  transform: scale(1.05);
+}
+
+.home .r-btn {
+  padding-left: 158px;
+}
+
+.home .side-img {
+  position: absolute;
+  height: 305px;
+  width: 450px;
+  margin-left: 720px;
+  margin-top: 100px;
+  filter: brightness(70%);
+  border-radius: 20px;
+}
+
+@keyframes showRight {
+  100% {
+      width: 0;
+  }
+}
+
+
 /* ======================= login/registration =======================*/
 
 .login-page {
@@ -85,6 +221,10 @@ header {
   align-items: flex-start;
   justify-content: flex-start;
   background: #e7d8ee;
+}
+
+#register-box {
+  height: 31em;
 }
 
 .login-page h4 {
@@ -222,7 +362,7 @@ a.discrete:hover {
   margin: auto auto;
   background: #fff;
   border-radius: 4px;
-  box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .12);
+  box-shadow: 3px 2px rgba(0, 0, 0, .12);
 }
 
 .left {
@@ -865,4 +1005,15 @@ a.discrete:hover {
 .legend .name {
   font-size: 14px;
   margin-top: 5px;
+}
+
+
+footer {
+  background-color: #52335e;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8.12vh;
+  font-size: small;
 }

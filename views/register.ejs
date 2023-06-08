@@ -1,10 +1,11 @@
 <%- include('header') %>
 
 <main class="login-page">
-    <div class="session">
+    <div class="session " id="register-box">
       <form action="/register" method="post" class="log-in reg-form" autocomplete="off">
         <h4>PLEBISCITE<span> '24</span></h4>
-        <p>Hello There! First of all feel free to fill this form before the Election:</p>
+        <p>
+          Greetings! Before the Election, we kindly request you to complete the following form. Please feel free to provide the requested information.</p>
   
         <div class="floating-label">
           <input
@@ -39,12 +40,12 @@
           <label for="password">Password:</label>
         </div>
         <button type="submit">Sign in</button>
-        <!-- <a
+        <a
           href="/login"
           class="discrete"
 
           >Already have an account? Login</a
-        > -->
+        >
       </form>
       <div class="right">
         <style type="text/css">
