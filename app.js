@@ -85,6 +85,8 @@ app.get("/results", async function (req, res) {
 app.post("/vote", async function (req, res) {
   if(isLogedIn){
     console.log("logedin");
+  }else{
+    console.log("login");
   }
   if (!currentUser.voted) {
     try {
