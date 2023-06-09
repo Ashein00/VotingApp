@@ -123,6 +123,7 @@ app.post("/login", async function (req, res) {
       if (foundUser.password === password) {
         req.session.isLogedIn = true;
         req.session.currentUser = foundUser;
+        req.session.voted = foundUser.voted;
         res.redirect("/vote");
       } else {
         const link = "/login";
@@ -165,7 +166,7 @@ app.post("/c_register", async function (req, res) {
 
 app.post("/vote", async function (req, res) {
   
-  if (req.session.currentUser.voted!==true) {
+  if (!req.session.voted) {
     try {
       const vote = req.body.myCheckbox;
       const [vote1, vote2, vote3] = vote;
