@@ -8,8 +8,6 @@ const session = require("express-session");
 var voted = null;
 var currentUserNIC="";
 
-
-
 // <-- database connection -->
 
 connectDatabase();
