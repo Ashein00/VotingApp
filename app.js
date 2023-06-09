@@ -3,9 +3,10 @@ const bodyParser = require("body-parser");
 const getParties = require("./public/scripts/getParties");
 const getVotes = require("./public/scripts/getVotes");
 const connectDatabase = require("./config/dbconfig");
+const session = require("express-session");
 
-var isLogedIn = false;
-var currentUser;
+
+
 
 // <-- database connection -->
 
@@ -24,6 +25,13 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
+app.use(session({
+  secret: "OIDAFJAI390IOjkl9POJKL9iokN78UHJK",
+  resave: false,
+  saveUninitialized: false
+}));
+
+
 //get methods
 
 app.get("/", function (req, res) {
@@ -40,7 +48,7 @@ app.get("/login", function (req, res) {
 
 app.get("/vote", async function (req, res) {
   
-  if (isLogedIn){
+  if (req.session.isLogedIn){
     try {
      
     const cands = await Candidate.find({});
@@ -73,7 +81,7 @@ app.get("/results", async function (req, res) {
     const votes = await Vote.find({});
     const voteArrays = getVotes(votes);
 
-    res.render("results", { user: currentUser, votes: voteArrays });
+    res.render("results", { user: req.session.currentUser, votes: voteArrays });
   } catch (err) {
     console.log(err);
   }
@@ -84,14 +92,14 @@ app.get("/results", async function (req, res) {
 
 app.post("/vote", async function (req, res) {
   
-  if (!currentUser.voted) {
+  if (!req.session.currentUser.voted) {
     try {
       const vote = req.body.myCheckbox;
       const [vote1, vote2, vote3] = vote;
       const party = vote1.split('|')[0];
       
       const newVote = new Vote({
-        NIC: currentUser.NIC,
+        NIC: req.session.currentUser.NIC,
         party: party,
         vote1: vote1,
         vote2: vote2,
@@ -100,10 +108,10 @@ app.post("/vote", async function (req, res) {
 
       await newVote.save();
 
-      if (currentUser) {
+      if (req.session.currentUser) {
        
-        currentUser.voted = true;
-        const user = await User.findOne({ NIC: currentUser.NIC });
+        req.session.currentUser.voted = true;
+        const user = await User.findOne({ NIC: req.session.currentUser.NIC });
         if (user) {
           user.voted = true;
           await user.save();
@@ -153,8 +161,8 @@ app.post("/login", async function (req, res) {
 
     if (foundUser) {
       if (foundUser.password === password) {
-        isLogedIn = true;
-        currentUser = foundUser;
+        req.session.isLogedIn = true;
+        req.session.currentUser = foundUser;
         res.redirect("/vote");
       } else {
         const link = "/login";
