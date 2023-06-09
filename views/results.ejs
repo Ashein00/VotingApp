@@ -38,7 +38,12 @@
     const partyArr = [];
     const indexArr = [];
 
+    const maxlength = 10;
+
     for (var i=0;i < sortedVote.length; i++){
+        if (i > maxlength){
+            break;
+        }
         xArray[i] = sortedVote[i][1];
         yArray[i] = sortedVote[i][0].split("|")[1];
         partyArr[i] = sortedVote[i][0].split("|")[0];
@@ -76,7 +81,7 @@
 
     const layout = { 
         title: {
-            text:"Plebiscite 2024 current results",
+            text:"Plebiscite 2024 current results [Top 10]",
             font: {
                 family: 'Arial,Segoe UI',
                 size: 24

@@ -5,7 +5,6 @@ const getVotes = require("./public/scripts/getVotes");
 const connectDatabase = require("./config/dbconfig");
 const session = require("express-session");
 
-
 // <-- database connection -->
 
 connectDatabase();
@@ -13,8 +12,6 @@ connectDatabase();
 const User = require("./Models/user");
 const Candidate = require("./Models/candidate");
 const Vote = require("./Models/vote");
-
-
 
 // <-- app -->
 
@@ -30,7 +27,6 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
-
 
 //get methods
 
@@ -87,10 +83,7 @@ app.get("/results", async function (req, res) {
   }
 });
 
-
 //post methods
-
-  
 
 app.post("/register", async function (req, res) {
   try {
@@ -173,7 +166,6 @@ app.post("/c_register", async function (req, res) {
 });
 
 
-
 app.post("/vote", async function (req, res) {
    
   const currentUser = req.session.currentUser;
@@ -223,7 +215,7 @@ app.post("/vote", async function (req, res) {
         } else {
           throw new Error('User not found');
         }
-        res.redirect("/vote");
+        res.render("redirect",{msg:"Success! Thankyou for voting",link:"/home",button_name:"Home"});
       } else {
         res.redirect("/");
       }
@@ -231,12 +223,10 @@ app.post("/vote", async function (req, res) {
       console.log(err);
     }
   }else{
-    const link = "/results";
-     
+    const link = "/results";   
     res.render("redirect",{msg:"you have already voted",link:link,button_name:"Results"});
   }
 });
-
 
 //server config
 
