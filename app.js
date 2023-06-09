@@ -20,9 +20,9 @@ const Vote = require("./Models/vote");
 
 
 var currentUser = new User({
-  name: req.body.name,
-  NIC: req.body.NIC,
-  password: req.body.password,
+  name:"",
+  NIC: "",
+  password: "",
   voted: false
 });
 // <-- app -->
