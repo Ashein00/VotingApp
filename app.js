@@ -51,7 +51,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", async function (req, res) {
-  console.log(currentUserNIC);
+  console.log(req.session.currentUserNIC+"get");
   if (req.session.isLogedIn){
     try {
      
@@ -126,7 +126,7 @@ app.post("/login", async function (req, res) {
     if (foundUser) {
       if (foundUser.password === password) {
         req.session.isLogedIn = true;
-        currentUserNIC = foundUser.NIC;
+        req.session.currentUserNIC = foundUser.NIC;
 
        
         res.redirect("/vote");
@@ -171,7 +171,7 @@ app.post("/c_register", async function (req, res) {
 
 app.post("/vote", async function (req, res,currentUser) {
 
-  console.log(currentUserNIC+"abc");
+  console.log(req.session.currentUserNIC+"abc");
   // currentUser = await User.findOne({ NIC: currentUserNIC });
   // if (!currentUser.voted) {
   //   try {
