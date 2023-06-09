@@ -90,47 +90,7 @@ app.get("/results", async function (req, res) {
 
 //post methods
 
-app.post("/vote", async function (req, res) {
   
-  if (!req.session.currentUser.voted) {
-    try {
-      const vote = req.body.myCheckbox;
-      const [vote1, vote2, vote3] = vote;
-      const party = vote1.split('|')[0];
-      
-      const newVote = new Vote({
-        NIC: req.session.currentUser.NIC,
-        party: party,
-        vote1: vote1,
-        vote2: vote2,
-        vote3: vote3
-      });
-
-      await newVote.save();
-
-      if (req.session.currentUser) {
-       
-        req.session.currentUser.voted = true;
-        const user = await User.findOne({ NIC: req.session.currentUser.NIC });
-        if (user) {
-          user.voted = true;
-          await user.save();
-        } else {
-          throw new Error('User not found');
-        }
-        res.redirect("/vote");
-      } else {
-        res.redirect("/");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }else{
-    const link = "/results";
-     
-    res.render("redirect",{msg:"you have already voted",link:link,button_name:"Results"});
-  }
-});  
 
 app.post("/register", async function (req, res) {
   try {
@@ -200,6 +160,48 @@ app.post("/c_register", async function (req, res) {
     res.redirect("/");
   } catch (err) {
     console.log(err);
+  }
+});
+
+app.post("/vote", async function (req, res) {
+  
+  if (req.session.currentUser.voted!=true) {
+    try {
+      const vote = req.body.myCheckbox;
+      const [vote1, vote2, vote3] = vote;
+      const party = vote1.split('|')[0];
+      
+      const newVote = new Vote({
+        NIC: req.session.currentUser.NIC,
+        party: party,
+        vote1: vote1,
+        vote2: vote2,
+        vote3: vote3
+      });
+
+      await newVote.save();
+
+      if (req.session.currentUser) {
+       
+        req.session.currentUser.voted = true;
+        const user = await User.findOne({ NIC: req.session.currentUser.NIC });
+        if (user) {
+          user.voted = true;
+          await user.save();
+        } else {
+          throw new Error('User not found');
+        }
+        res.redirect("/vote");
+      } else {
+        res.redirect("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }else{
+    const link = "/results";
+     
+    res.render("redirect",{msg:"you have already voted",link:link,button_name:"Results"});
   }
 });
 
