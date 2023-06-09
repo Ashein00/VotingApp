@@ -215,7 +215,7 @@ app.post("/vote", async function (req, res) {
 
       if (currentUser) {
        
-        req.session.currentUser.voted = true;
+        
         currentUser.voted = true;
         const user = await User.findOne({ NIC: currentUser.NIC });
         if (user) {
