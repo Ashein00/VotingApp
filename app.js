@@ -6,7 +6,7 @@ const connectDatabase = require("./config/dbconfig");
 const session = require("express-session");
 
 var voted = null;
-var currentUser;
+var currentUserNIC="";
 
 
 
@@ -126,9 +126,8 @@ app.post("/login", async function (req, res) {
     if (foundUser) {
       if (foundUser.password === password) {
         req.session.isLogedIn = true;
-        currentUser = foundUser;
-        
-        
+        currentUserNIC = foundUser.NIC;
+
        
         res.redirect("/vote");
       } else {
@@ -171,7 +170,7 @@ app.post("/c_register", async function (req, res) {
 });
 
 app.post("/vote", async function (req, res,currentUser) {
- 
+  currentUser = await User.findOne({ NIC: currentUserNIC });
   if (!currentUser.voted) {
     try {
       const vote = req.body.myCheckbox;
