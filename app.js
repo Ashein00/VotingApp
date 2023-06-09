@@ -171,7 +171,7 @@ app.post("/c_register", async function (req, res) {
 
 app.post("/vote", async function (req, res,currentUser) {
 
-  console.log("abc");
+  console.log(currentUserNIC+"abc");
   // currentUser = await User.findOne({ NIC: currentUserNIC });
   // if (!currentUser.voted) {
   //   try {
