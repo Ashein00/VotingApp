@@ -170,65 +170,67 @@ app.post("/c_register", async function (req, res) {
 });
 
 app.post("/vote", async function (req, res,currentUser) {
-  currentUser = await User.findOne({ NIC: currentUserNIC });
-  if (!currentUser.voted) {
-    try {
-      const vote = req.body.myCheckbox;
 
-    let vote1 = '';
-    let vote2 = '';
-    let vote3 = '';
+  console.log(currentUserNIC);
+  // currentUser = await User.findOne({ NIC: currentUserNIC });
+  // if (!currentUser.voted) {
+  //   try {
+  //     const vote = req.body.myCheckbox;
 
-    if (Array.isArray(vote)) {
-      if (vote.length >= 1) {
-        vote1 = vote[0];
-      }
-      if (vote.length >= 2) {
-        vote2 = vote[1];
-      }
-      if (vote.length >= 3) {
-        vote3 = vote[2];
-      }
-    } else if (vote) {
-      vote1 = vote;
-    }
+  //   let vote1 = '';
+  //   let vote2 = '';
+  //   let vote3 = '';
+
+  //   if (Array.isArray(vote)) {
+  //     if (vote.length >= 1) {
+  //       vote1 = vote[0];
+  //     }
+  //     if (vote.length >= 2) {
+  //       vote2 = vote[1];
+  //     }
+  //     if (vote.length >= 3) {
+  //       vote3 = vote[2];
+  //     }
+  //   } else if (vote) {
+  //     vote1 = vote;
+  //   }
 
           
-      const party = vote1.split('|')[0];
+  //     const party = vote1.split('|')[0];
       
-      const newVote = new Vote({
-        NIC: currentUser.NIC,
-        party: party,
-        vote1: vote1,
-        vote2: vote2,
-        vote3: vote3
-      });
+  //     const newVote = new Vote({
+  //       NIC: currentUser.NIC,
+  //       party: party,
+  //       vote1: vote1,
+  //       vote2: vote2,
+  //       vote3: vote3
+  //     });
       
      
-      // await newVote.save();
+  //     // await newVote.save();
 
-      if (currentUser) {
+  //     if (currentUser) {
 
-        currentUser.voted = true;
-        const user = await User.findOne({ NIC: currentUser.NIC });
-        if (user) {
-          user.voted = true;
-          await user.save();
-        } else {
-          throw new Error('User not found');
-        }
-        res.redirect("/vote");
-      } else {
-        res.redirect("/");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }else{
-    const link = "/results";
+  //       currentUser.voted = true;
+  //       const user = await User.findOne({ NIC: currentUser.NIC });
+  //       if (user) {
+  //         user.voted = true;
+  //         await user.save();
+  //       } else {
+  //         throw new Error('User not found');
+  //       }
+  //       res.redirect("/vote");
+  //     } else {
+  //       res.redirect("/");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }else{
+  //   const link = "/results";
      
-    res.render("redirect",{msg:"you have already voted",link:link,button_name:"Results"});
-  }
+  //   res.render("redirect",{msg:"you have already voted",link:link,button_name:"Results"});
+  // }
 });
 
 
