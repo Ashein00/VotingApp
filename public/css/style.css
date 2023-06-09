@@ -571,6 +571,7 @@ a.discrete:hover {
   min-height: 28em;
   box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
   width: 17em;
+  margin-top: 1em;
 
 }
 
