@@ -165,7 +165,7 @@ app.post("/c_register", async function (req, res) {
 
 app.post("/vote", async function (req, res) {
   
-  if (req.session.currentUser.voted!=true) {
+  if (req.session.currentUser.voted!==true) {
     try {
       const vote = req.body.myCheckbox;
       const [vote1, vote2, vote3] = vote;
