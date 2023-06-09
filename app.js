@@ -18,6 +18,13 @@ const User = require("./Models/user");
 const Candidate = require("./Models/candidate");
 const Vote = require("./Models/vote");
 
+
+var currentUser = new User({
+  name: req.body.name,
+  NIC: req.body.NIC,
+  password: req.body.password,
+  voted: false
+});
 // <-- app -->
 
 const app = express();
@@ -124,8 +131,8 @@ app.post("/login", async function (req, res) {
     if (foundUser) {
       if (foundUser.password === password) {
         req.session.isLogedIn = true;
-        req.session.currentUser = foundUser;
-        voted = foundUser.voted;
+        currentUser = foundUser;
+        
         
        
         res.redirect("/vote");
@@ -169,10 +176,8 @@ app.post("/c_register", async function (req, res) {
 });
 
 app.post("/vote", async function (req, res) {
-  
-  const currentUser = req.session.currentUser;
  
-  if (!voted) {
+  if (!currentUser.voted) {
     try {
       const vote = req.body.myCheckbox;
 
