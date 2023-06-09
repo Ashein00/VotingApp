@@ -6,7 +6,7 @@ const connectDatabase = require("./config/dbconfig");
 const session = require("express-session");
 
 var voted = null;
-
+var currentUser;
 
 
 
@@ -19,12 +19,7 @@ const Candidate = require("./Models/candidate");
 const Vote = require("./Models/vote");
 
 
-var currentUser = new User({
-  name:"",
-  NIC: "",
-  password: "",
-  voted: false
-});
+
 // <-- app -->
 
 const app = express();
