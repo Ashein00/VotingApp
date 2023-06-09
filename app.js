@@ -173,7 +173,7 @@ app.post("/vote", async function (req, res) {
       const party = vote1.split('|')[0];
       
       const newVote = new Vote({
-        NIC: req.session.currentUser.NIC,
+        NIC: currentUser.NIC,
         party: party,
         vote1: vote1,
         vote2: vote2,
