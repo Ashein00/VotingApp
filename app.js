@@ -124,7 +124,7 @@ app.post("/login", async function (req, res) {
       if (foundUser.password === password) {
         req.session.isLogedIn = true;
         req.session.currentUser = foundUser;
-        currentUser.voted = foundUser.voted;
+        console.log(currentUser.voted);
         
        
         res.redirect("/vote");
