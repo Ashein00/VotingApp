@@ -6,6 +6,7 @@ const connectDatabase = require("./config/dbconfig");
 const session = require("express-session");
 
 var voted = null;
+var currentUser = null;
 
 
 
@@ -124,6 +125,7 @@ app.post("/login", async function (req, res) {
       if (foundUser.password === password) {
         req.session.isLogedIn = true;
         req.session.currentUser = foundUser;
+        currentUser =foundUser;
         voted = foundUser.voted;
         
        
@@ -168,6 +170,7 @@ app.post("/c_register", async function (req, res) {
 });
 
 app.post("/vote", async function (req, res) {
+  
   
  
   if (!voted) {
