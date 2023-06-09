@@ -8,6 +8,7 @@ const session = require("express-session");
 
 
 
+
 // <-- database connection -->
 
 connectDatabase();
@@ -22,14 +23,14 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/public"));
-
 app.use(session({
   secret: "OIDAFJAI390IOjkl9POJKL9iokN78UHJK",
   resave: false,
   saveUninitialized: false
 }));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public"));
 
 
 //get methods
@@ -47,7 +48,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", async function (req, res) {
-  console.log(req.session.currentUser);
+  
   if (req.session.isLogedIn){
     try {
      
@@ -123,6 +124,7 @@ app.post("/login", async function (req, res) {
       if (foundUser.password === password) {
         req.session.isLogedIn = true;
         req.session.currentUser = foundUser;
+        req.session.voted = false;
        
         res.redirect("/vote");
       } else {
@@ -166,12 +168,30 @@ app.post("/c_register", async function (req, res) {
 
 app.post("/vote", async function (req, res) {
 
-  console.log(req.session.currentUser);
   const currentUser = req.session.currentUser;
-  if (!currentUser.voted) {
+  if (!currentUser.voted | !req.session.voted |!req.session.currentUser.voted) {
     try {
       const vote = req.body.myCheckbox;
-      const [vote1, vote2, vote3] = vote;
+
+    let vote1 = '';
+    let vote2 = '';
+    let vote3 = '';
+
+    if (Array.isArray(vote)) {
+      if (vote.length >= 1) {
+        vote1 = vote[0];
+      }
+      if (vote.length >= 2) {
+        vote2 = vote[1];
+      }
+      if (vote.length >= 3) {
+        vote3 = vote[2];
+      }
+    } else if (vote) {
+      vote1 = vote;
+    }
+
+          
       const party = vote1.split('|')[0];
       
       const newVote = new Vote({
@@ -181,12 +201,14 @@ app.post("/vote", async function (req, res) {
         vote2: vote2,
         vote3: vote3
       });
-
+      
+     
       await newVote.save();
 
       if (currentUser) {
        
         req.session.currentUser.voted = true;
+        req.session.voted =true;
         const user = await User.findOne({ NIC: currentUser.NIC });
         if (user) {
           user.voted = true;
