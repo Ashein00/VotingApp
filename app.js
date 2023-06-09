@@ -82,13 +82,14 @@ app.get("/results", async function (req, res) {
 
 //post methods
 
-app.post("/vote", async function (req, res,currentUser) {
+app.post("/vote", async function (req, res) {
+  
   if (!currentUser.voted) {
     try {
       const vote = req.body.myCheckbox;
       const [vote1, vote2, vote3] = vote;
       const party = vote1.split('|')[0];
-
+      
       const newVote = new Vote({
         NIC: currentUser.NIC,
         party: party,
@@ -100,6 +101,7 @@ app.post("/vote", async function (req, res,currentUser) {
       await newVote.save();
 
       if (currentUser) {
+       
         currentUser.voted = true;
         const user = await User.findOne({ NIC: currentUser.NIC });
         if (user) {
