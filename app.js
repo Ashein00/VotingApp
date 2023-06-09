@@ -51,7 +51,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/vote", async function (req, res) {
-  console.log(currentUser);
+
   if (req.session.isLogedIn){
     try {
      
