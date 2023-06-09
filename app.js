@@ -170,8 +170,8 @@ app.post("/c_register", async function (req, res) {
   }
 });
 
-app.post("/vote", async function (req, res) {
- console.log(currentUser);
+app.post("/vote", async function (req, res,currentUser) {
+ 
   if (!currentUser.voted) {
     try {
       const vote = req.body.myCheckbox;
