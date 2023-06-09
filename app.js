@@ -165,7 +165,7 @@ app.post("/c_register", async function (req, res) {
 });
 
 app.post("/vote", async function (req, res) {
-  
+  currentUser = req.session.currentUser;
   if (!req.session.voted) {
     try {
       const vote = req.body.myCheckbox;
@@ -185,7 +185,7 @@ app.post("/vote", async function (req, res) {
       if (req.session.currentUser) {
        
         req.session.currentUser.voted = true;
-        const user = await User.findOne({ NIC: req.session.currentUser.NIC });
+        const user = await User.findOne({ NIC: currentUser.NIC });
         if (user) {
           user.voted = true;
           await user.save();
