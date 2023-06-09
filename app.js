@@ -5,7 +5,7 @@ const getVotes = require("./public/scripts/getVotes");
 const connectDatabase = require("./config/dbconfig");
 const session = require("express-session");
 
-var currentUser = null;
+var voted = null;
 
 
 
@@ -124,7 +124,7 @@ app.post("/login", async function (req, res) {
       if (foundUser.password === password) {
         req.session.isLogedIn = true;
         req.session.currentUser = foundUser;
-        console.log(req.session.currentUser.voted);
+        voted = foundUser.voted;
         
        
         res.redirect("/vote");
@@ -170,7 +170,7 @@ app.post("/c_register", async function (req, res) {
 app.post("/vote", async function (req, res) {
   
  
-  if (!currentUser.voted) {
+  if (!voted) {
     try {
       const vote = req.body.myCheckbox;
 
