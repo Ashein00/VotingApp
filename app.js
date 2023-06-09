@@ -165,7 +165,8 @@ app.post("/c_register", async function (req, res) {
 });
 
 app.post("/vote", async function (req, res) {
-  currentUser = req.session.currentUser;
+  const currentUser = req.session.currentUser;
+
   if (!currentUser.voted) {
     try {
       const vote = req.body.myCheckbox;
