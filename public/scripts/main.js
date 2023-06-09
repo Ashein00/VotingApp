@@ -4,6 +4,7 @@ $(function () {
   }, 1000);
 });
 
+
 const getColor = {"Democratic Party":"#18851d",
                   "Republican Party":"#885e0b",
                   "Labour Party":"#8f1e1e",
@@ -15,7 +16,7 @@ const getColor = {"Democratic Party":"#18851d",
 window.addEventListener('DOMContentLoaded', function() {
   var tablinks = document.getElementsByClassName("tablink");
   if (tablinks.length > 0) {
-    tablinks[0].click();
+    tablinks[2].click();
   }
 });
 

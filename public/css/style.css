@@ -64,7 +64,7 @@ header {
 
 .home {
   display: flex;
-  height: 100%;
+  height: 80%;
   align-items: center;
   padding: 0 10%;
   font-family: 'Poppins', sans-serif;
@@ -209,6 +209,79 @@ header {
       width: 0;
   }
 }
+/* ======================= About Page =======================*/
+
+.about-section {
+  margin: 0;
+  padding: 50px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  color: #ededed;
+  background: #2A2F4F;
+}
+
+.about-section .about-us {
+  margin-top: -40px;
+  color: white;
+}
+
+.about-section .card {
+  box-shadow: 0 4px 8px 0 black;
+  margin: 8px;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  height: 23em;
+  color: rgb(8, 7, 7);
+}
+
+.pfl-photo {
+  border-radius: 10px;
+  height: 13em;
+}
+
+.about-sec {
+  padding: 50px;
+  text-align: center;
+  background-color: #2A2F4F;
+}
+
+.about-section .container {
+  text-align: center;
+  padding: 0 16px;
+}
+
+.about-section .container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.about-section .container h2 {
+  font-size: 1.2em;
+  font-weight: 530;
+}
+
+.about-section .title {
+  color: grey;
+}
+
+.about-section .button {
+  align-items: end;
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #9173ce;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.about-section .button:hover {
+  background-color: #2A2F4F;
+}
 
 
 /* ======================= login/registration =======================*/
@@ -235,7 +308,8 @@ header {
   opacity: 0.85;
 }
 
-.login-page h6 {
+#passVarify {
+  visibility: visible;
   font-size: smaller;
   font-weight: 300;
   opacity: 0.85;
@@ -283,7 +357,7 @@ a.discrete {
   margin-left: auto;
   font-weight: 400;
   transition: all 0.3s ease;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 a.discrete:hover {
@@ -465,22 +539,8 @@ a.discrete:hover {
  }
 
 .vote-page{
-  height: 100%;
-  /* margin: 10px; */
-  /* border-bottom: solid 20px rgba(0, 0, 0, .1);
-  border-radius: 10px;
-  font-family: Arial;
-  box-shadow: 0 0 15px rgb(0, 0, 0); */
+  height: max-content;
 }
-
-.greeting {
-  background-color: #917FB3;
-  margin: 0;
-  padding-bottom: 10px;
-  color: white;
-  font-size: 1em;
-}
-
 
 .tablink {
   background-color: #2f0850;
@@ -505,10 +565,6 @@ a.discrete:hover {
   height: fit-content;
 }
 
-/* #voting_form {
-  height: max-content;
-} */
-
 .card-custom {
   overflow: hidden;
   height: 28em;
@@ -524,7 +580,6 @@ a.discrete:hover {
 
 .card-body{
   font-size: 1.05em;
-  /* font-weight: 450; */
   overflow-y: auto;
   height: 40px;
   font-family: 'Voces', cursive;;
@@ -621,7 +676,7 @@ a.discrete:hover {
 
 /* confirm button  */
 #voting_form button {
-  margin: 2rem 5rem 2rem 0;
+  margin: 2rem 5rem 1rem 0;
   float: right;
   position: relative;
   background: var(--clr);
@@ -722,8 +777,6 @@ a.discrete:hover {
   }
 }
 
-
-
 /* ======================= Redirect Page =======================*/
 
 .error-box {
@@ -757,7 +810,7 @@ a.discrete:hover {
 /* ======================= registration of candidates =======================*/
 
 .canReg-body {
-  background-image: url("https://img.freepik.com/fotos-gratis/arranjo-no-local-de-trabalho-no-fundo-roxo-com-espaco-da-copia_23-2148404536.jpg?w=740&t=st=1685550423~exp=1685551023~hmac=fb0f260496e10c6a6961c191e50a74d0a7fb35779c5ef9b93a6546a527123b4d"); 
+  background-image: url(/Images/Reg-background.jpg); 
   background-size: cover; 
   height: 80vh;
 }
@@ -1013,7 +1066,6 @@ a.discrete:hover {
   font-size: 14px;
   margin-top: 5px;
 }
-
 
 footer {
   background-color: #52335e;

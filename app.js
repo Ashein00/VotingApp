@@ -83,7 +83,7 @@ app.get("/results", async function (req, res) {
 //post methods
 
 app.post("/vote", async function (req, res,currentUser) {
-  if (currentUser.voted == false) {
+  if (!currentUser.voted) {
     try {
       const vote = req.body.myCheckbox;
       const [vote1, vote2, vote3] = vote;
@@ -132,7 +132,11 @@ app.post("/register", async function (req, res) {
     });
 
     await newUser.save();
-    res.redirect("/");
+    res.render("redirect", {
+      msg: "You have successfully registered. Please login!",
+      link: "/login",
+      button_name: "Log In"
+    });
   } catch (err) {
     console.log(err);
   }
