@@ -94,15 +94,15 @@ app.post("/register", async function (req, res) {
       voted: false
     });
     const tempUser = await User.findOne({ NIC: req.body.NIC });
+
+    const link = "/login"; 
     if(tempUser){
-      const link = "/register";
-     
       res.render("redirect",{msg:"you have alredy registered, Pleases login",link:link,button_name:"Login"});
     }else{
       await newUser.save();
       res.render("redirect", {
       msg: "You have successfully registered. Please login!",
-      link: "/login",
+      link: link,
       button_name: "Log In"
     });
     }
@@ -215,7 +215,7 @@ app.post("/vote", async function (req, res) {
         } else {
           throw new Error('User not found');
         }
-        res.render("redirect",{msg:"Success! Thankyou for voting",link:"/home",button_name:"Home"});
+        res.render("redirect",{msg:"Success! Thank you for voting",link:"/",button_name:"Home"});
       } else {
         res.redirect("/");
       }
