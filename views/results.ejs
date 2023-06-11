@@ -23,8 +23,10 @@
 </div>
 
 <script>
+    //get votes
     const voteDict = <%- JSON.stringify(votes) %>;
 
+    // sort array
     let sortedVote = [];
     for (var row in voteDict){
         sortedVote.push([row, voteDict[row] ]);
@@ -33,17 +35,16 @@
         return a[1] - b[1];
     })
 
+    //get top 10
+    sortedVote = sortedVote.splice(-10);
+
     const xArray = [];
     const yArray = [];
     const partyArr = [];
     const indexArr = [];
 
-    const maxlength = 10;
-
+    // graph details
     for (var i=0;i < sortedVote.length; i++){
-        if (i > maxlength){
-            break;
-        }
         xArray[i] = sortedVote[i][1];
         yArray[i] = sortedVote[i][0].split("|")[1];
         partyArr[i] = sortedVote[i][0].split("|")[0];
