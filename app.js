@@ -159,7 +159,7 @@ app.post("/c_register", async function (req, res) {
     });
 
     await newCandidate.save();
-    res.redirect("/");
+    res.render("redirect",{msg:"Congratulations on successfully registering as a candidate. Thank You!",link:"/",button_name:"Home"});
   } catch (err) {
     console.log(err);
   }
