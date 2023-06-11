@@ -7,6 +7,8 @@ html {
 
 header {
   background-color: #917fb3;
+  min-height: 70px;
+  height:12vh;
 }
 
 .logo-circle {
@@ -68,7 +70,8 @@ header {
 
 .home {
   display: flex;
-  height: 80%;
+  height: 79.88vh;
+  min-height: 500px;
   align-items: center;
   padding: 0 10%;
   font-family: 'Poppins', sans-serif;
@@ -296,7 +299,8 @@ header {
 /* ======================= login/registration =======================*/
 
 .login-page {
-  height: 80vh;
+  height: 79.88vh;
+  min-height: 500px;
   width: 100vw;
   margin: 0 0;
   display: flex;
@@ -822,7 +826,7 @@ a.discrete:hover {
 .canReg-body {
   background-image: url(/Images/Reg-background.jpg); 
   background-size: cover; 
-  height: 80vh;
+  height: 79.88vh;
 }
 
 #msform {
@@ -1084,5 +1088,6 @@ footer {
   justify-content: center;
   align-items: center;
   height: 8.12vh;
+  min-height: 30px;
   font-size: small;
 }
