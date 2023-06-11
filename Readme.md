@@ -1,6 +1,8 @@
 # Vote App
 
-!npm install
+// host in local machine
+1. npm install
+2. npm start
 
 Website link:
-https://lime-awful-wasp.cyclic.app/
+https://nice-ruby-hippo-vest.cyclic.app/
