@@ -235,6 +235,7 @@ header {
   margin-bottom: 1.5rem;
   border-radius: 10px;
   height: 23em;
+  width: fit-content;
   color: rgb(8, 7, 7);
 }
 
